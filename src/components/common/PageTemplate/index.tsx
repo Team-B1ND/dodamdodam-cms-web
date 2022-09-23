@@ -1,6 +1,12 @@
 import { ReactNode } from "react";
+import DarkmodeButton from "../DarkmodeButton";
 import Header from "../Header";
-import { PageTemplateContainer, PageTemplateWrap } from "./style";
+import Nav from "../Nav";
+import {
+  PageTemplateContainer,
+  PageTemplateLeftWrap,
+  PageTemplateWrap,
+} from "./style";
 
 interface Props {
   children: ReactNode;
@@ -9,8 +15,12 @@ interface Props {
 const PageTemplate = ({ children }: Props) => {
   return (
     <PageTemplateContainer>
-      <Header />
-      <PageTemplateWrap>{children}</PageTemplateWrap>
+      <Nav />
+      <PageTemplateLeftWrap>
+        <Header />
+        <PageTemplateWrap>{children}</PageTemplateWrap>
+      </PageTemplateLeftWrap>
+      <DarkmodeButton />
     </PageTemplateContainer>
   );
 };
