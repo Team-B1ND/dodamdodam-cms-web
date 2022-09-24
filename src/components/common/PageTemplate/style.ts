@@ -9,16 +9,17 @@ export const PageTemplateContainer = styled.div`
   position: relative;
 `;
 
-export const PageTemplateWrap = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 40px;
-  box-sizing: border-box;
-`;
-
 export const PageTemplateLeftWrap = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
+`;
+
+export const PageTemplateWrap = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  box-sizing: border-box;
+  overflow-y: scroll;
 `;
