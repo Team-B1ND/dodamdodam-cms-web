@@ -5,7 +5,7 @@ import {
   NavMenuIcon,
   NavMenuItemWrap,
 } from "./style";
-import DodamTextLogo from "../../../assets/logo/dodamTextLogo.svg";
+import DodamTextLogo from "../../../assets/logo/dodamTextLogo.png";
 import { HiMenu } from "@react-icons/all-files/hi/HiMenu";
 import { IoCloseSharp } from "@react-icons/all-files/io5/IoCloseSharp";
 import { useRecoilState } from "recoil";
@@ -26,12 +26,7 @@ const Nav = () => {
       </NavLogoWrap>
       <NavMenuItemWrap>
         {NAV_ITEMS.map((item) => (
-          <NavItem
-            {...item}
-            icon={<item.icon />}
-            isSelect={true}
-            key={item.title}
-          />
+          <NavItem {...item} icon={<item.icon />} key={item.title} />
         ))}
       </NavMenuItemWrap>
     </NavContainer>

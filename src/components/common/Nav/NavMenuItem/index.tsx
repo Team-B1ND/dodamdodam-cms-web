@@ -4,31 +4,42 @@ import {
   NavMenuItemText,
 } from "./style";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { navFoldAtom } from "../../../../store/common/commonAtom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  navCurrentTabAtom,
+  navFoldAtom,
+} from "../../../../store/common/commonAtom";
 
 interface Props {
-  isSelect: boolean;
   title: string;
   icon: JSX.Element;
   link: string;
   color: string;
 }
 
-const NavMenuItem = ({ isSelect, title, icon, link, color }: Props) => {
+const NavMenuItem = ({ title, icon, link, color }: Props) => {
   const navigate = useNavigate();
 
-  const [isFold, setIsFold] = useRecoilState(navFoldAtom);
+  const isFold = useRecoilValue(navFoldAtom);
+  const [tab, setTab] = useRecoilState(navCurrentTabAtom);
+  const isSelect = title === tab;
 
   return (
     <NavMenuItemContainer
       isSelect={isSelect}
       color={color}
-      onClick={() => navigate(link)}
+      onClick={() => {
+        setTab(title);
+        navigate(link);
+      }}
       isFold={isFold}
     >
-      <NavMenuItemIcon color={color}>{icon}</NavMenuItemIcon>
-      <NavMenuItemText isFold={isFold}>{title}</NavMenuItemText>
+      <NavMenuItemIcon isSelect={isSelect} color={color}>
+        {icon}
+      </NavMenuItemIcon>
+      <NavMenuItemText isSelect={isSelect} isFold={isFold}>
+        {title}
+      </NavMenuItemText>
     </NavMenuItemContainer>
   );
 };

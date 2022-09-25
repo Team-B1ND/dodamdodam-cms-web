@@ -15,11 +15,9 @@ export const NavContainer = styled.div<{ isFold: boolean }>`
   ${({ isFold }) =>
     isFold
       ? css`
-          padding: 0px;
           min-width: 88px;
         `
       : css`
-          padding: 0px 30px;
           min-width: 265px;
         `}
 `;
@@ -32,6 +30,8 @@ export const NavLogoWrap = styled.div<{ isFold: boolean }>`
   justify-content: space-between;
   position: relative;
   overflow: hidden;
+  padding: 0px 30px;
+  box-sizing: border-box;
 
   ${({ isFold }) =>
     isFold &&
@@ -45,7 +45,7 @@ export const NavLogoImg = styled.img<{ isFold: boolean }>`
   object-fit: scale-down;
   transition: all 0.3s ease;
   position: absolute;
-  left: 0px;
+  left: 30px;
 
   ${({ isFold }) =>
     isFold
@@ -78,9 +78,11 @@ export const NavMenuIcon = styled.div<{ isFold: boolean }>`
 export const NavMenuItemWrap = styled.div`
   width: 100%;
   height: 100%;
-  padding: 40px 0px;
+  padding: 40px 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   row-gap: 10px;
+  overflow: hidden;
+  box-sizing: border-box;
 `;

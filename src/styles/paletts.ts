@@ -136,5 +136,5 @@ export const palette = {
   purple,
   indigo,
   gray,
-  main: "#ff585a",
+  main: "linear-gradient(to right, #0067BC, #3200FC)",
 };
