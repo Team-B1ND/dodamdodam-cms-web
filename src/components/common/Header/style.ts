@@ -2,9 +2,8 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
   width: 100%;
-  height: 70px;
+  min-height: 70px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  z-index: 1;
   background-color: ${({ theme }) => theme.backgroundColor};
-  position: absolute;
-  top: 0px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
