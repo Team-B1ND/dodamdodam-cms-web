@@ -1,5 +1,11 @@
+import WriteEditor from "./WriteEditor";
+
 const Write = () => {
-  return <div></div>;
+  return (
+    <div>
+      <WriteEditor />
+    </div>
+  );
 };
 
 export default Write;
