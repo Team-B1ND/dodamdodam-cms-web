@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Notice } from "../../../types/interfaces/notice/notice.type";
 import {
   HomeNoticeItemContainer,
@@ -12,10 +12,16 @@ import {
   HomeNoticeItemSettingButtonWrap,
   HomeNoticeItemSettingModal,
   HomeNoticeItemSettingModalItem,
+  HomeNoticeItemSettingModalItemIcon,
+  HomeNoticeItemSettingModalItemText,
 } from "./style";
 import { HiCheckCircle } from "@react-icons/all-files/hi/HiCheckCircle";
 import { HiClock } from "@react-icons/all-files/hi/HiClock";
 import { BsThreeDots } from "@react-icons/all-files/bs/BsThreeDots";
+import { HiOutlinePencil } from "@react-icons/all-files/hi/HiOutlinePencil";
+import { CgTrashEmpty } from "@react-icons/all-files/cg/CgTrashEmpty";
+import useOutsideClick from "../../../hooks/common/useOutsideClick";
+import { palette } from "../../../styles/paletts";
 
 interface Props {
   data: Notice;
@@ -23,6 +29,9 @@ interface Props {
 
 const HomeNoticeItem = ({ data }: Props) => {
   const [fold, setFold] = useState(true);
+  const modalContainerRef = useRef<HTMLDivElement>(null);
+
+  useOutsideClick({ setState: setFold, ref: modalContainerRef });
 
   return (
     <HomeNoticeItemContainer>
@@ -36,14 +45,30 @@ const HomeNoticeItem = ({ data }: Props) => {
         </HomeNoticeItemTitleWrap>
       </HomeNoticeItemLeftWrap>
       <HomeNoticeItemRightWrap>
-        <HomeNoticeItemSettingButtonWrap>
+        <HomeNoticeItemSettingButtonWrap ref={modalContainerRef}>
           <HomeNoticeItemSettingButton onClick={() => setFold((prev) => !prev)}>
             <BsThreeDots />
           </HomeNoticeItemSettingButton>
           {!fold && (
             <HomeNoticeItemSettingModal>
-              <HomeNoticeItemSettingModalItem></HomeNoticeItemSettingModalItem>
-              <HomeNoticeItemSettingModalItem></HomeNoticeItemSettingModalItem>
+              <HomeNoticeItemSettingModalItem>
+                <HomeNoticeItemSettingModalItemIcon>
+                  <HiOutlinePencil />
+                </HomeNoticeItemSettingModalItemIcon>
+                <HomeNoticeItemSettingModalItemText>
+                  수정
+                </HomeNoticeItemSettingModalItemText>
+              </HomeNoticeItemSettingModalItem>
+              <HomeNoticeItemSettingModalItem
+                style={{ color: palette.red[400] }}
+              >
+                <HomeNoticeItemSettingModalItemIcon>
+                  <CgTrashEmpty />
+                </HomeNoticeItemSettingModalItemIcon>
+                <HomeNoticeItemSettingModalItemText>
+                  삭제
+                </HomeNoticeItemSettingModalItemText>
+              </HomeNoticeItemSettingModalItem>
             </HomeNoticeItemSettingModal>
           )}
         </HomeNoticeItemSettingButtonWrap>

@@ -90,7 +90,7 @@ export const HomeNoticeItemSettingButton = styled.button`
 `;
 
 export const HomeNoticeItemSettingModal = styled.div`
-  width: 125px;
+  width: 110px;
   display: flex;
   flex-direction: column;
   top: 28px;
@@ -99,9 +99,36 @@ export const HomeNoticeItemSettingModal = styled.div`
   background-color: ${({ theme }) => theme.backgroundColor4};
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   z-index: 2;
+  border-radius: 5px;
+  overflow: hidden;
 `;
 
 export const HomeNoticeItemSettingModalItem = styled.div`
   width: 100%;
-  height: 50px;
+  height: 40px;
+  padding: 8px 16px;
+  background-color: ${({ theme }) => theme.backgroundColor};
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  color: ${({ theme }) => theme.contrast};
+
+  &:hover {
+    filter: brightness(90%);
+  }
+`;
+
+export const HomeNoticeItemSettingModalItemIcon = styled.div`
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const HomeNoticeItemSettingModalItemText = styled.span`
+  font-size: 15px;
+  margin-left: 10px;
 `;

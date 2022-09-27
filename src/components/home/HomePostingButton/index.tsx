@@ -4,10 +4,13 @@ import {
   HomePostingButtonText,
 } from "./style";
 import { BsFillPlusCircleFill } from "@react-icons/all-files/bs/BsFillPlusCircleFill";
+import { useNavigate } from "react-router-dom";
 
 const HomePostingButton = () => {
+  const navigate = useNavigate();
+
   return (
-    <HomePostingButtonContainer>
+    <HomePostingButtonContainer onClick={() => navigate("/write")}>
       <HomePostingButtonIcon>
         <BsFillPlusCircleFill />
       </HomePostingButtonIcon>
