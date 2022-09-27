@@ -4,7 +4,7 @@ import { palette } from "../../../styles/paletts";
 export const NavContainer = styled.div<{ isFold: boolean }>`
   height: 100vh;
   background-color: ${({ theme }) => theme.backgroundColor};
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   z-index: 2;
   box-sizing: border-box;
   display: flex;

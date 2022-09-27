@@ -3,12 +3,13 @@ import {
   NavMenuItemIcon,
   NavMenuItemText,
 } from "./style";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   navCurrentTabAtom,
   navFoldAtom,
 } from "../../../../store/common/commonAtom";
+import { useEffect, useMemo } from "react";
 
 interface Props {
   title: string;
@@ -19,17 +20,27 @@ interface Props {
 
 const NavMenuItem = ({ title, icon, link, color }: Props) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  console.log(location);
 
   const isFold = useRecoilValue(navFoldAtom);
   const [tab, setTab] = useRecoilState(navCurrentTabAtom);
-  const isSelect = title === tab;
+
+  useEffect(() => {
+    setTab(`/${location.pathname.split("/")[1]}`);
+  }, [location, setTab]);
+
+  const isSelect = useMemo(() => {
+    return link === tab;
+  }, [tab, link]);
 
   return (
     <NavMenuItemContainer
       isSelect={isSelect}
       color={color}
       onClick={() => {
-        setTab(title);
+        setTab(link);
         navigate(link);
       }}
       isFold={isFold}
