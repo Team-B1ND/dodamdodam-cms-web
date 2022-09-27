@@ -137,4 +137,5 @@ export const palette = {
   indigo,
   gray,
   main: "linear-gradient(to right, #0067BC, #3200FC)",
+  boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
 };

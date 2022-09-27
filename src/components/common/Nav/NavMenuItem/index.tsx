@@ -19,6 +19,10 @@ interface Props {
 
 const NavMenuItem = ({ title, icon, link, color }: Props) => {
   const navigate = useNavigate();
+<<<<<<< Updated upstream
+=======
+  const location = useLocation();
+>>>>>>> Stashed changes
 
   const isFold = useRecoilValue(navFoldAtom);
   const [tab, setTab] = useRecoilState(navCurrentTabAtom);
