@@ -3,7 +3,13 @@ import { Editor } from "@toast-ui/react-editor";
 
 const useWrite = () => {
   const editorRef = useRef<Editor>(null);
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState<string>("");
+
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current?.getInstance().setMarkdown("");
+    }
+  }, []);
 
   const onChangeWrite = () => {
     if (editorRef.current) {
@@ -15,7 +21,11 @@ const useWrite = () => {
     console.log(content);
   };
 
-  return { editorRef, onChangeWrite, onSubmitWrite };
+  useEffect(() => {
+    console.log(content);
+  }, [content]);
+
+  return { editorRef, content, onChangeWrite, onSubmitWrite };
 };
 
 export default useWrite;

@@ -4,11 +4,12 @@ import { WriteEditorContainer } from "./style";
 import useWrite from "../../../hooks/write/useWrite";
 
 const WriteEditor = () => {
-  const { editorRef, onChangeWrite, onSubmitWrite } = useWrite();
+  const { editorRef, content, onChangeWrite, onSubmitWrite } = useWrite();
 
   return (
     <WriteEditorContainer>
       <Editor
+        initialValue={content}
         ref={editorRef}
         height="658px"
         previewStyle="vertical"
