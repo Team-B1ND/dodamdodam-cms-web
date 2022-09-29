@@ -1,20 +1,26 @@
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { WriteEditorContainer } from "./style";
-import useWrite from "../../../hooks/write/useWrite";
+import { RefObject } from "react";
+import { NoticeWrite } from "../../../types/interfaces/notice/notice.type";
+import React from "react";
 
-const WriteEditor = () => {
-  const { editorRef, content, onChangeWrite, onSubmitWrite } = useWrite();
+interface Props {
+  editorRef: RefObject<Editor>;
+  writeData: NoticeWrite;
+  onChangeContent: () => void;
+}
 
+const WriteEditor = ({ editorRef, writeData, onChangeContent }: Props) => {
   return (
     <WriteEditorContainer>
       <Editor
-        initialValue={content}
+        initialValue={writeData.content}
         ref={editorRef}
-        height="658px"
+        height="573px"
         previewStyle="vertical"
         initialEditType="markdown"
-        onChange={onChangeWrite}
+        onChange={onChangeContent}
         hooks={{
           addImageBlobHook: (blob, callback) => {
             callback(
@@ -29,4 +35,4 @@ const WriteEditor = () => {
   );
 };
 
-export default WriteEditor;
+export default React.memo(WriteEditor);

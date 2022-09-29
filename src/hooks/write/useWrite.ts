@@ -1,9 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Editor } from "@toast-ui/react-editor";
+import { NoticeWrite } from "../../types/interfaces/notice/notice.type";
 
 const useWrite = () => {
   const editorRef = useRef<Editor>(null);
-  const [content, setContent] = useState<string>("");
+  const [writeData, setWriteData] = useState<NoticeWrite>({
+    title: "",
+    content: "",
+  });
 
   useEffect(() => {
     if (editorRef.current) {
@@ -11,21 +15,31 @@ const useWrite = () => {
     }
   }, []);
 
-  const onChangeWrite = () => {
+  const onChangeContent = useCallback(() => {
     if (editorRef.current) {
-      setContent(editorRef.current.getInstance().getMarkdown());
+      setWriteData((prev) => ({
+        ...prev,
+        content: editorRef.current!.getInstance().getMarkdown(),
+      }));
     }
+  }, [editorRef, setWriteData]);
+
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setWriteData((prev) => ({ ...prev, title: value }));
   };
 
-  const onSubmitWrite = () => {
-    console.log(content);
+  const onSubmitWrite = useCallback(() => {
+    console.log(writeData.content);
+  }, [writeData]);
+
+  return {
+    editorRef,
+    writeData,
+    onChangeTitle,
+    onChangeContent,
+    onSubmitWrite,
   };
-
-  useEffect(() => {
-    console.log(content);
-  }, [content]);
-
-  return { editorRef, content, onChangeWrite, onSubmitWrite };
 };
 
 export default useWrite;

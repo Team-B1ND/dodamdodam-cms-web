@@ -5,3 +5,8 @@ export interface Notice {
   create_at: string;
   status: "ACTIVE" | "PENDING";
 }
+
+export interface NoticeWrite {
+  title: string;
+  content: string;
+}
