@@ -20,7 +20,7 @@ export const NavMenuItemContainer = styled.div<{
     isSelect &&
     css`
       border-radius: 5px;
-      background: ${palette.main};
+      background: ${palette.mainGradient};
     `}
 
   ${({ isFold }) =>
