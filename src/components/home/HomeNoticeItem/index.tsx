@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Notice } from "../../../types/interfaces/notice/notice.type";
+import { Notice } from "../../../types/notice/notice.type";
 import {
   HomeNoticeItemContainer,
   HomeNoticeItemDate,

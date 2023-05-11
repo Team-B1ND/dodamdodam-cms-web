@@ -1,8 +1,4 @@
-import {
-  HomePostingButtonContainer,
-  HomePostingButtonIcon,
-  HomePostingButtonText,
-} from "./style";
+import { HomePostingButtonIcon, HomePostingButtonText } from "./style";
 import { BsFillPlusCircleFill } from "@react-icons/all-files/bs/BsFillPlusCircleFill";
 import { useNavigate } from "react-router-dom";
 import NormalButton from "../../common/NormalButton";
