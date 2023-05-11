@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@b1nd/b1nd-react-util": "^1.0.2",
     "@react-icons/all-files": "^4.1.0",
     "@toast-ui/editor": "^3.2.0",
     "@toast-ui/react-editor": "^3.2.0",

@@ -1,4 +1,4 @@
-import Write from "../components/write";
+import Write from "../components/Write";
 
 const WritePage = () => {
   return <Write />;

@@ -1,6 +1,6 @@
 import { Routes as Switch, Route } from "react-router-dom";
-import HomePage from "../pages/homePage";
-import WritePage from "../pages/writePage";
+import HomePage from "../../pages/homePage";
+import WritePage from "../../pages/writePage";
 
 const Router = () => {
   return (

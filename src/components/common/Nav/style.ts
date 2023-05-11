@@ -3,14 +3,14 @@ import { palette } from "../../../styles/paletts";
 
 export const NavContainer = styled.div<{ isFold: boolean }>`
   height: 100vh;
-  background-color: ${({ theme }) => theme.backgroundColor};
-  box-shadow: ${palette.boxShadow};
+  background-color: ${({ theme }) => theme.backgroundColor4};
   z-index: 2;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   position: relative;
   transition: all 0.3s ease;
+  border-right: 1px solid ${({ theme }) => theme.borderColor};
 
   ${({ isFold }) =>
     isFold
