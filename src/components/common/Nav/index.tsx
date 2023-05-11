@@ -10,8 +10,8 @@ import { HiMenu } from "@react-icons/all-files/hi/HiMenu";
 import { IoCloseSharp } from "@react-icons/all-files/io5/IoCloseSharp";
 import { useRecoilState } from "recoil";
 import { navFoldAtom } from "../../../store/common/commonAtom";
-import { NAV_ITEMS } from "../../../constants/common/common.constant";
 import NavItem from "./NavMenuItem";
+import { NAV_ITEMS } from "./constant";
 
 const Nav = () => {
   const [isFold, setIsFold] = useRecoilState(navFoldAtom);

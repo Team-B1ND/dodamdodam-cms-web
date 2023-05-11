@@ -1,7 +1,7 @@
-import Recruit from "../components/Recruit";
+import RecruitWrite from "../components/RecruitWrite";
 
 const RecruitWritePage = () => {
-  return <Recruit />;
+  return <RecruitWrite />;
 };
 
 export default RecruitWritePage;
