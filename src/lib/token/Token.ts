@@ -12,26 +12,24 @@ class Token {
     this.storage = storage;
   }
 
-  public getToken(
+  public get(
     key: typeof ACCESS_TOKEN_KEY | typeof REFRESH_TOKEN_KEY
   ): string | undefined {
     return this.storage.get(key);
   }
 
-  public setToken(
+  public set(
     key: typeof ACCESS_TOKEN_KEY | typeof REFRESH_TOKEN_KEY,
     value: string
   ): void {
     this.storage.set(key, value);
   }
 
-  public removeToken(
-    key: typeof ACCESS_TOKEN_KEY | typeof REFRESH_TOKEN_KEY
-  ): void {
+  public remove(key: typeof ACCESS_TOKEN_KEY | typeof REFRESH_TOKEN_KEY): void {
     this.storage.remove(key);
   }
 
-  public clearToken(): void {
+  public clearT(): void {
     this.storage.remove(ACCESS_TOKEN_KEY);
     this.storage.remove(REFRESH_TOKEN_KEY);
   }

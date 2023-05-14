@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const PageTemplateContainer = styled.div`
+export const Container = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
@@ -9,14 +9,14 @@ export const PageTemplateContainer = styled.div`
   position: relative;
 `;
 
-export const PageTemplateLeftWrap = styled.div`
+export const RightWrap = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
 `;
 
-export const PageTemplateWrap = styled.div`
+export const ContentWrap = styled.div`
   width: 100%;
   height: 100%;
   padding: 40px;

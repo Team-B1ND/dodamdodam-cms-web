@@ -1,7 +1,12 @@
+import Provider from "./components/common/Provider";
 import Router from "./components/Router";
 
 function App() {
-  return <Router />;
+  return (
+    <Provider>
+      <Router />
+    </Provider>
+  );
 }
 
 export default App;

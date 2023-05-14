@@ -23,8 +23,8 @@ const responseErrorInterceptor = async (error: AxiosError) => {
       response: { status },
     } = error;
 
-    const usingAccessToken = Token.getToken(ACCESS_TOKEN_KEY);
-    const usingRefreshToken = Token.getToken(REFRESH_TOKEN_KEY);
+    const usingAccessToken = Token.get(ACCESS_TOKEN_KEY);
+    const usingRefreshToken = Token.get(REFRESH_TOKEN_KEY);
 
     if (
       usingAccessToken !== undefined &&
@@ -36,7 +36,7 @@ const responseErrorInterceptor = async (error: AxiosError) => {
           refreshToken: usingRefreshToken,
         });
 
-        Token.setToken(ACCESS_TOKEN_KEY, newAccessToken);
+        Token.set(ACCESS_TOKEN_KEY, newAccessToken);
         customAxios.defaults.headers.common[
           REQUEST_TOKEN_KEY
         ] = `Bearer ${newAccessToken}`;
