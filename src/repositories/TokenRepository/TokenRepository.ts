@@ -1,13 +1,13 @@
 import { Response } from "../../types/util/response.type";
 
 export interface TokenRepository {
-  postRefresh({ refreshToken }: postRefreshParam): Promise<postRefreshResponse>;
+  postRefresh({ refreshToken }: PostRefreshParam): Promise<PostRefreshResponse>;
 }
 
-export interface postRefreshParam {
+export interface PostRefreshParam {
   refreshToken: string;
 }
 
-export interface postRefreshResponse extends Response {
+export interface PostRefreshResponse extends Response {
   data: string;
 }

@@ -2,9 +2,9 @@ import { Teacher } from "../../types/member/member.type";
 import { Response } from "../../types/util/response.type";
 
 export interface MemberRepository {
-  getMyMember(): Promise<getMyMemberResponse>;
+  getMyMember(): Promise<GetMyMemberResponse>;
 }
 
-export interface getMyMemberResponse extends Response {
+export interface GetMyMemberResponse extends Response {
   data: Teacher;
 }

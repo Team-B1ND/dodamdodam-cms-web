@@ -22,8 +22,9 @@ const withAuth = (AuthComponent: React.ComponentType) => {
       if (
         !isAuthority ||
         (!serverMyMemberDataIsLoading &&
-          serverMyMemberData?.data.position !== "티쳐")
+          serverMyMemberData?.data.position === "")
       ) {
+        window.location.href = "/teacher/sign";
       }
     }, [
       navigate,
@@ -31,7 +32,15 @@ const withAuth = (AuthComponent: React.ComponentType) => {
       serverMyMemberData,
       serverMyMemberDataIsLoading,
     ]);
+
+    if (!isAuthority) {
+      return <></>;
+    }
+
+    return <AuthComponent />;
   };
+
+  return AuthCheck;
 };
 
 export default withAuth;
