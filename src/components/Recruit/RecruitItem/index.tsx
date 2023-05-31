@@ -4,8 +4,6 @@ import * as S from "./style";
 interface Props extends Recruit {}
 
 const RecruitItem = ({ companyName, image }: Props) => {
-  console.log(companyName);
-
   return (
     <S.Container>
       <S.RecruitImage src={image} />
