@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Editor } from "@toast-ui/react-editor";
-import { NoticeWrite } from "../../types/interfaces/notice/notice.type";
+import { NoticeWrite } from "../../types/notice/notice.type";
 
 const useWrite = () => {
   const editorRef = useRef<Editor>(null);

@@ -1,8 +1,8 @@
 import useWrite from "../../hooks/write/useWrite";
+import SubmitButton from "../common/SubmitButton";
 import {
   WriteContainer,
   WriteHeaderContainer,
-  WriteHeaderSubmitButton,
   WriteHeaderTitleInput,
 } from "./style";
 import WriteEditor from "./WriteEditor";
@@ -23,9 +23,7 @@ const Write = () => {
           placeholder="제목을 입력해주세요"
           onChange={onChangeTitle}
         />
-        <WriteHeaderSubmitButton onClick={onSubmitWrite}>
-          게시
-        </WriteHeaderSubmitButton>
+        <SubmitButton onClick={onSubmitWrite}>게시</SubmitButton>
       </WriteHeaderContainer>
       <WriteEditor
         editorRef={editorRef}

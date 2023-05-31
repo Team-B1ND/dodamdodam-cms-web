@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { useRecoilState } from "recoil";
 import { DefaultTheme } from "styled-components";
 import { THEME_KEY } from "../../constants/theme/theme.constant";
-import cookie from "../../lib/cookie/cookie";
+import Cookie from "../../lib/storage/Cookie";
 import { themeModeAtom } from "../../store/theme/themeAtom";
 import { darkTheme, lightTheme } from "../../styles/theme";
 import { ETheme } from "../../types/enums/theme/theme.enum";
@@ -18,7 +18,7 @@ const useTheme = () => {
 
   const handleTheme = useCallback((): void => {
     const switchTheme = currentTheme === DARK ? LIGHT : DARK;
-    cookie.setCookie(THEME_KEY, String(switchTheme));
+    Cookie.set(THEME_KEY, String(switchTheme));
     setCurrentTheme(switchTheme);
   }, [DARK, LIGHT, currentTheme, setCurrentTheme]);
 

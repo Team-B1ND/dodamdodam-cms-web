@@ -2,7 +2,7 @@ import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { WriteEditorContainer } from "./style";
 import { RefObject } from "react";
-import { NoticeWrite } from "../../../types/interfaces/notice/notice.type";
+import { NoticeWrite } from "../../../types/notice/notice.type";
 import React from "react";
 
 interface Props {

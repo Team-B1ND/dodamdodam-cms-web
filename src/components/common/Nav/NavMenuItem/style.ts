@@ -68,13 +68,10 @@ export const NavMenuItemText = styled.span<{
   margin-left: 20px;
 
   ${({ isSelect }) =>
-    isSelect
-      ? css`
-          color: white;
-        `
-      : css`
-          color: ${palette.gray[400]};
-        `}
+    isSelect &&
+    css`
+      color: white;
+    `}
 
   ${({ isFold }) =>
     isFold

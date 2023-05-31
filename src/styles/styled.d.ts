@@ -7,6 +7,7 @@ declare module "styled-components" {
     backgroundColor2: string;
     backgroundColor3: string;
     backgroundColor4: string;
+    borderColor: string;
     darkmodeButtonColor: string;
   }
 }

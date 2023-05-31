@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Notice } from "../../../types/interfaces/notice/notice.type";
+import { Notice } from "../../../types/notice/notice.type";
 import {
   HomeNoticeItemContainer,
   HomeNoticeItemDate,
@@ -20,8 +20,8 @@ import { HiClock } from "@react-icons/all-files/hi/HiClock";
 import { BsThreeDots } from "@react-icons/all-files/bs/BsThreeDots";
 import { HiOutlinePencil } from "@react-icons/all-files/hi/HiOutlinePencil";
 import { CgTrashEmpty } from "@react-icons/all-files/cg/CgTrashEmpty";
-import useOutsideClick from "../../../hooks/common/useOutsideClick";
 import { palette } from "../../../styles/paletts";
+import { useOutsideClick } from "@b1nd/b1nd-react-util";
 
 interface Props {
   data: Notice;
@@ -31,7 +31,10 @@ const HomeNoticeItem = ({ data }: Props) => {
   const [fold, setFold] = useState(true);
   const modalContainerRef = useRef<HTMLDivElement>(null);
 
-  useOutsideClick({ setState: setFold, ref: modalContainerRef });
+  useOutsideClick({
+    container: modalContainerRef.current,
+    callback: () => setFold(true),
+  });
 
   return (
     <HomeNoticeItemContainer>
