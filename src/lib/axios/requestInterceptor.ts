@@ -17,7 +17,7 @@ export const requestInterceptor = async (
     config.headers[REQUEST_TOKEN_KEY] = `Bearer ${Token.get(ACCESS_TOKEN_KEY)}`;
   } else {
     B1ndToast.showError("토큰이 존재하지 않습니다.");
-    window.location.href = "/admin/signs";
+    window.location.href = "/admin/sign";
   }
 
   return config;

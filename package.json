@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@b1nd/b1nd-dodam-common-ui": "^1.0.3",
     "@b1nd/b1nd-react-util": "^1.0.2",
     "@b1nd/b1nd-toastify": "^1.0.3",
     "@react-icons/all-files": "^4.1.0",

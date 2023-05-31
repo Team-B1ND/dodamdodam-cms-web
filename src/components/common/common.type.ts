@@ -2,6 +2,6 @@ import React from "react";
 import { CSSObject } from "styled-components";
 
 export interface CommonComponentProps {
-  chlidren?: React.ReactNode;
+  children?: React.ReactNode;
   customStyle?: CSSObject;
 }

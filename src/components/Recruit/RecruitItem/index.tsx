@@ -1,7 +1,19 @@
+import { Recruit } from "../../../types/recruit/recruit.type";
 import * as S from "./style";
 
-const RecruitItem = () => {
-  return <S.Container></S.Container>;
+interface Props extends Recruit {}
+
+const RecruitItem = ({ companyName, image }: Props) => {
+  console.log(companyName);
+
+  return (
+    <S.Container>
+      <S.RecruitImage src={image} />
+      <S.RecruitDescriptionContainer>
+        <S.CompanyName>{companyName}</S.CompanyName>
+      </S.RecruitDescriptionContainer>
+    </S.Container>
+  );
 };
 
 export default RecruitItem;

@@ -1,13 +1,13 @@
-import RecruitItem from "./RecruitItem";
+import { Suspense } from "react";
+import RecruitList from "./RecruitList";
 import * as S from "./style";
 
 const Recruit = () => {
   return (
     <S.Container>
-      <RecruitItem />
-      <RecruitItem />
-      <RecruitItem />
-      <RecruitItem />
+      <Suspense fallback={<>로딩중...</>}>
+        <RecruitList />
+      </Suspense>
     </S.Container>
   );
 };

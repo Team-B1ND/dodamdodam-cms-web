@@ -5,7 +5,7 @@ import { recruitImageAtom } from "../../store/recruitWrite/recuritWriteAtom";
 
 const useUploadRecruitImage = () => {
   const [isDrag, setIsDrag] = useState(false);
-  const [, setImage] = useRecoilState(recruitImageAtom);
+  const [, setRecruitImage] = useRecoilState(recruitImageAtom);
   const postUploadMutation = usePostUploadMutation();
 
   const onChangeImage = useCallback(
@@ -23,15 +23,15 @@ const useUploadRecruitImage = () => {
         { formData },
         {
           onSuccess: (data) => {
-            setImage(data.data);
+            setRecruitImage(data.data);
           },
           onError: () => {
-            setImage("");
+            setRecruitImage("");
           },
         }
       );
     },
-    [postUploadMutation, setImage]
+    [postUploadMutation, setRecruitImage]
   );
 
   const dropHandler = useCallback(

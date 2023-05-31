@@ -7,9 +7,9 @@ import {
 
 class TokenRepositoryImpl implements TokenRepository {
   public async postRefresh({
-    refreshToken,
+    token,
   }: PostRefreshParam): Promise<PostRefreshResponse> {
-    const { data } = await customAxios.post("/token/refresh", { refreshToken });
+    const { data } = await customAxios.post("/token/refresh", { token });
     return data;
   }
 }

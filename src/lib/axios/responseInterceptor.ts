@@ -25,7 +25,7 @@ export const responseErrorInterceptor = async (error: AxiosError) => {
     ) {
       try {
         const { data: newAccessToken } = await TokenRepositoryImpl.postRefresh({
-          refreshToken: usingRefreshToken,
+          token: usingRefreshToken,
         });
 
         Token.set(ACCESS_TOKEN_KEY, newAccessToken);
@@ -34,7 +34,7 @@ export const responseErrorInterceptor = async (error: AxiosError) => {
         ] = `Bearer ${newAccessToken}`;
       } catch (error) {
         B1ndToast.showError("세션이 만료 되었습니다.");
-        window.location.href = "/teacher/sign";
+        // window.location.href = "/teacher/sign";
       }
     }
   }
