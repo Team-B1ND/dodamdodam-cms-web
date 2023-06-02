@@ -36,6 +36,7 @@ export const RecruitDescriptionContainer = styled.div`
   position: absolute;
   background-color: black;
   opacity: 30%;
+  justify-content: space-between;
 
   ${Container}:hover & {
     bottom: 0px;
@@ -46,4 +47,10 @@ export const CompanyName = styled.h3`
   font-size: 24px;
   color: white;
   font-weight: bold;
+`;
+
+export const WriterName = styled.p`
+  color: white;
+  font-size: 18px;
+  margin-top: auto;
 `;
