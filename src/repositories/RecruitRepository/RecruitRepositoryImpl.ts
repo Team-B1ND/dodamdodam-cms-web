@@ -1,5 +1,6 @@
 import { customAxios } from "../../lib/axios/customAxios";
 import {
+  DeleteRecruitParam,
   GetRecruitParam,
   GetRecruitResponse,
   GetRecruitsResponse,
@@ -27,6 +28,10 @@ class RecruitRepositoryImpl implements RecruitRepository {
 
   public async patchRecruit(params: PatchRecruitParam): Promise<void> {
     await customAxios.patch("/recruit", params);
+  }
+
+  public async deleteRecruit({ id }: DeleteRecruitParam): Promise<void> {
+    await customAxios.delete(`/recruit/${id}`);
   }
 }
 

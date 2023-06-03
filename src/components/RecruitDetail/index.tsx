@@ -5,6 +5,7 @@ import MenuDropdown from "../common/MenuDropdown";
 import * as S from "./style";
 import { HiOutlinePencil } from "@react-icons/all-files/hi/HiOutlinePencil";
 import { CgTrashEmpty } from "@react-icons/all-files/cg/CgTrashEmpty";
+import useDeleteRecruit from "../../hooks/recruit/useDeleteRecruit";
 
 const RecruitDetail = () => {
   return (
@@ -20,6 +21,8 @@ const RecruitDetailContent = () => {
   const { id }: Readonly<Params<"id">> = useParams();
 
   const { data } = useGetRecruitQuery({ id: Number(id) }, { suspense: true });
+
+  const { onDelete } = useDeleteRecruit();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -43,7 +46,10 @@ const RecruitDetailContent = () => {
               <MenuDropdown.Button.Icon icon={<HiOutlinePencil />} />
               수정
             </MenuDropdown.Button>
-            <MenuDropdown.Button buttonType="DELETE">
+            <MenuDropdown.Button
+              buttonType="DELETE"
+              onClick={() => onDelete(Number(id))}
+            >
               <MenuDropdown.Button.Icon icon={<CgTrashEmpty />} />
               삭제
             </MenuDropdown.Button>

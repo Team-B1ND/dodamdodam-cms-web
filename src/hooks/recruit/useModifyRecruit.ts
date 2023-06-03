@@ -102,7 +102,7 @@ const useModifyRecruit = ({ recruitId }: Props) => {
           navigate(`/recruit/${recruitId}`);
         },
         onError: () => {
-          B1ndToast.showError("수정에 실패하였습니다.");
+          B1ndToast.showError("에러가 발생하였습니다");
         },
       }
     );

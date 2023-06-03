@@ -9,6 +9,8 @@ export interface RecruitRepository {
   postRecruit(params: PostRecruitParam): Promise<void>;
 
   patchRecruit(params: PatchRecruitParam): Promise<void>;
+
+  deleteRecruit({ id }: DeleteRecruitParam): Promise<void>;
 }
 
 export interface GetRecruitsResponse extends Response {
@@ -28,3 +30,7 @@ export interface PostRecruitParam
 
 export interface PatchRecruitParam
   extends Pick<Recruit, "image" | "etc" | "companyName" | "id"> {}
+
+export interface DeleteRecruitParam {
+  id: number;
+}
