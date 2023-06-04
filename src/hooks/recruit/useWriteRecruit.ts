@@ -44,6 +44,7 @@ const useWriteRecruit = () => {
         onSuccess: () => {
           setRecruitImage("");
           setTextContent({ etc: "", companyName: "" });
+          B1ndToast.showSuccess("작성하였습니다.");
         },
         onError: () => {
           B1ndToast.showError("에러가 발생하였습니다");
