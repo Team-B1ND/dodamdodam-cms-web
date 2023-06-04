@@ -27,7 +27,7 @@ const Provider = ({ children }: Props) => {
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <B1ndToastContainer autoClose={5000} limit={6} />
-        <BrowserRouter>
+        <BrowserRouter basename="cms">
           <ThemeProvider>
             <Layout>{children}</Layout>
           </ThemeProvider>
