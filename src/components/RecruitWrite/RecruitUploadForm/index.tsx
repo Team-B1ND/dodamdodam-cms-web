@@ -8,7 +8,6 @@ import useWriteRecruit from "../../../hooks/recruit/useWriteRecruit";
 import { Flex } from "../../common/Flex";
 import SubmitButton from "../../common/SubmitButton";
 import { Params, useParams } from "react-router-dom";
-import { useGetRecruitQuery } from "../../../queries/recruit/recruit.query";
 import useModifyRecruit from "../../../hooks/recruit/useModifyRecruit";
 
 const RecruitUploadForm = () => {
