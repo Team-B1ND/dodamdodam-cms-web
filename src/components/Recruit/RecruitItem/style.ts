@@ -30,17 +30,13 @@ export const RecruitDescriptionContainer = styled.div`
   display: flex;
   padding: 20px;
   box-sizing: border-box;
-  bottom: -100px;
   transition: all 0.3s ease;
-  left: 0px;
   position: absolute;
+  left: 0px;
+  bottom: 0px;
   background-color: black;
   opacity: 30%;
   justify-content: space-between;
-
-  ${Container}:hover & {
-    bottom: 0px;
-  }
 `;
 
 export const CompanyName = styled.h3`
