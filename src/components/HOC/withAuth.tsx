@@ -24,7 +24,7 @@ const withAuth = (AuthComponent: React.ComponentType) => {
         (!serverMyMemberDataIsLoading &&
           serverMyMemberData?.data.position === "")
       ) {
-        window.location.href = "/teacher/sign";
+        window.location.href = "/teacher";
       }
     }, [
       navigate,
