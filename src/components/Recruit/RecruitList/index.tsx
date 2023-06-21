@@ -20,9 +20,9 @@ const RecruitList = () => {
       <S.YearWrap>
         {[...createYears].map((item) =>
           item === selectedYear ? (
-            <SubmitButton>{item}</SubmitButton>
+            <SubmitButton key={item}>{item}</SubmitButton>
           ) : (
-            <NormalButton onClick={() => setSelectedYear(item)}>
+            <NormalButton key={item} onClick={() => setSelectedYear(item)}>
               {item}
             </NormalButton>
           )

@@ -57,10 +57,6 @@ const useModifyRecruit = ({ recruitId }: Props) => {
     }
   }, [serverRecruitData, setRecruitImage, recruitId]);
 
-  useEffect(() => {
-    console.log(prevModifyRecruitData);
-  }, [prevModifyRecruitData]);
-
   const onChangeModifyContent = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
