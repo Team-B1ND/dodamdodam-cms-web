@@ -37,4 +37,5 @@ export const EtcContent = styled.pre`
   border: 1px solid ${({ theme }) => theme.borderColor};
   padding: 25px;
   color: ${({ theme }) => theme.contrast};
+  white-space: pre-wrap;
 `;

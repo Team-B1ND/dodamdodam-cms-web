@@ -1,10 +1,16 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { ChangeEvent, useState } from "react";
+import { useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import { QUERY_KEYS } from "../../queries/queryKey";
 import { usePostRecruitMutation } from "../../queries/recruit/recruit.query";
 import { recruitImageAtom } from "../../store/recruitWrite/recuritWriteAtom";
 
 const useWriteRecruit = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
   const [recruitImage, setRecruitImage] = useRecoilState(recruitImageAtom);
   const [textContent, setTextContent] = useState({
     etc: "",
@@ -44,6 +50,8 @@ const useWriteRecruit = () => {
         onSuccess: () => {
           setRecruitImage("");
           setTextContent({ etc: "", companyName: "" });
+          queryClient.invalidateQueries(QUERY_KEYS.recruit.getRecruits);
+          navigate("/recruit");
           B1ndToast.showSuccess("작성하였습니다.");
         },
         onError: () => {

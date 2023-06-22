@@ -25,8 +25,8 @@ const Router = () => {
 
   return (
     <Switch>
-      <Route path="/" element={<AuthHomePage />} />
-      <Route path="/write" element={<AuthWritePage />} />
+      {/* <Route path="/" element={<AuthHomePage />} /> */}
+      {/* <Route path="/write" element={<AuthWritePage />} /> */}
       <Route path="/recruit" element={<AuthRecruitPage />} />
       <Route path="/recruitwrite" element={<AuthRecruitWritePage />} />
       <Route path="/recruit/:id" element={<AuthRecruitDetailPage />} />

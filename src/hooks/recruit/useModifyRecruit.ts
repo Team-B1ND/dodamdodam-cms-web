@@ -95,6 +95,7 @@ const useModifyRecruit = ({ recruitId }: Props) => {
           queryClient.invalidateQueries(
             QUERY_KEYS.recruit.getRecruit(recruitId!)
           );
+          queryClient.invalidateQueries(QUERY_KEYS.recruit.getRecruits);
           navigate(`/recruit/${recruitId}`);
         },
         onError: () => {
