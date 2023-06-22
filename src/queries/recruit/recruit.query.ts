@@ -37,7 +37,6 @@ export const useGetRecruitQuery = (
     {
       enabled: !!id,
       ...options,
-      staleTime: Infinity,
     }
   );
 
