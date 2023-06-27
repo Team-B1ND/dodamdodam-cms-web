@@ -31,6 +31,7 @@ const RecruitList = () => {
       <S.Container>
         {data?.data
           .filter((recruit) => recruit.createdDate.slice(0, 4) === selectedYear)
+          .reverse()
           .map((item) => (
             <RecruitItem {...item}>{item}</RecruitItem>
           ))}
