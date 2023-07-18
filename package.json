@@ -5,11 +5,13 @@
   "dependencies": {
     "@b1nd/b1nd-dodam-common-ui": "^1.0.3",
     "@b1nd/b1nd-react-util": "^1.0.2",
+    "@b1nd/b1nd-styled-components-util": "^1.0.4",
     "@b1nd/b1nd-toastify": "^1.0.3",
     "@react-icons/all-files": "^4.1.0",
     "@toast-ui/editor": "^3.2.0",
     "@toast-ui/react-editor": "^3.2.0",
     "axios": "^1.4.0",
+    "dayjs": "^1.11.9",
     "js-cookie": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -9,3 +9,8 @@ export interface Recruit {
   createdDate: string;
   companyName: string;
 }
+
+export interface RecruitFile {
+  readonly id: number;
+  pdfUrl: string;
+}

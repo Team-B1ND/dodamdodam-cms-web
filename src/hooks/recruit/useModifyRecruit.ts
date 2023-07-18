@@ -8,7 +8,10 @@ import {
   useGetRecruitQuery,
   usePatchRecruitMutation,
 } from "../../queries/recruit/recruit.query";
-import { recruitImageAtom } from "../../store/recruitWrite/recuritWriteAtom";
+import {
+  recruitImageAtom,
+  recruitPdfFileNameAtom,
+} from "../../store/recruitWrite/recuritWriteAtom";
 
 interface Props {
   recruitId: number | undefined;
@@ -33,7 +36,16 @@ const useModifyRecruit = ({ recruitId }: Props) => {
     etc: "",
   });
 
+  const [prevModifyRecruitFileNames, setPrevModifyRecruitFileNames] = useState(
+    []
+  );
+  const [modifyRecruitFileNames, setModifyRecruitFileNames] = useState([]);
+
   const [recruitImage, setRecruitImage] = useRecoilState(recruitImageAtom);
+
+  const [recruitPdfFileNames, setRecruitPdfFileNames] = useRecoilState(
+    recruitPdfFileNameAtom
+  );
 
   const { data: serverRecruitData } = useGetRecruitQuery({
     id: Number(recruitId),
@@ -54,8 +66,9 @@ const useModifyRecruit = ({ recruitId }: Props) => {
         companyName,
       });
       setRecruitImage(serverRecruitData.data.image);
+      // setRecruitPdfFileNames(serverRecruitData.data.pdfUrl);
     }
-  }, [serverRecruitData, setRecruitImage, recruitId]);
+  }, [serverRecruitData, setRecruitImage, recruitId, setRecruitPdfFileNames]);
 
   const onChangeModifyContent = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -88,6 +101,7 @@ const useModifyRecruit = ({ recruitId }: Props) => {
       {
         id: recruitId!,
         ...modifyRecruitData,
+        pdfUrl: modifyRecruitFileNames,
       },
       {
         onSuccess: () => {

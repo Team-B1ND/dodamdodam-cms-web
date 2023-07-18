@@ -1,6 +1,9 @@
 import { Suspense, useState } from "react";
 import { Params, useNavigate, useParams } from "react-router-dom";
-import { useGetRecruitQuery } from "../../queries/recruit/recruit.query";
+import {
+  useGetRecruitFileNamesQuery,
+  useGetRecruitQuery,
+} from "../../queries/recruit/recruit.query";
 import MenuDropdown from "../common/MenuDropdown";
 import * as S from "./style";
 import { HiOutlinePencil } from "@react-icons/all-files/hi/HiOutlinePencil";
@@ -20,7 +23,15 @@ const RecruitDetail = () => {
 const RecruitDetailContent = () => {
   const { id }: Readonly<Params<"id">> = useParams();
 
-  const { data } = useGetRecruitQuery({ id: Number(id) }, { suspense: true });
+  const { data: serverRecruitData } = useGetRecruitQuery(
+    { id: Number(id) },
+    { suspense: true }
+  );
+
+  const { data: serverRecruitFileNamesData } = useGetRecruitFileNamesQuery(
+    { id: Number(id) },
+    { suspense: true }
+  );
 
   const { onDelete } = useDeleteRecruit();
 
@@ -28,10 +39,12 @@ const RecruitDetailContent = () => {
 
   const navigate = useNavigate();
 
+  console.log(serverRecruitFileNamesData);
+
   return (
     <S.Wrap>
       <S.TopWrap>
-        <S.CompanyName>{data?.data.companyName}</S.CompanyName>
+        <S.CompanyName>{serverRecruitData?.data.companyName}</S.CompanyName>
         <MenuDropdown
           customStyle={{ width: 30, height: 30 }}
           isOpen={isOpen}
@@ -56,8 +69,11 @@ const RecruitDetailContent = () => {
           </MenuDropdown.Buttons>
         </MenuDropdown>
       </S.TopWrap>
-      <S.RecruitImage src={data?.data.image} />
-      <S.EtcContent>{data?.data.etc}</S.EtcContent>
+      <S.RecruitImage src={serverRecruitData?.data.image} />
+      {serverRecruitFileNamesData?.data.map((fileName) => (
+        <S.RecruitFileNameBox>{fileName.pdfUrl}</S.RecruitFileNameBox>
+      ))}
+      <S.EtcContent>{serverRecruitData?.data.etc}</S.EtcContent>
     </S.Wrap>
   );
 };

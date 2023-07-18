@@ -2,17 +2,6 @@ import styled from "styled-components";
 import { palette } from "../../../styles/paletts";
 
 export const Container = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  column-gap: 20px;
-
-  input[type="file"] {
-    display: none;
-  }
-`;
-
-export const UploadContainer = styled.div`
   width: 40%;
   aspect-ratio: 3/4;
   position: relative;
@@ -31,16 +20,18 @@ export const UploadBox = styled.label`
   row-gap: 10px;
 `;
 
-export const UploadButton = styled.div`
+export const UploadButton = styled.button`
   width: 60px;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${({ theme }) => theme.contrast};
-  font-size: 60px;
+  color: #666;
+  font-size: 30px;
   background: none;
   border: 0px;
+  background-color: #e1e2e4;
+  border-radius: 100%;
 `;
 
 export const UploadGuide = styled.p`
@@ -77,23 +68,4 @@ export const ImageDeleteButton = styled.button`
   font-size: 24px;
   color: white;
   padding: 0px;
-`;
-
-export const CompanyNameInput = styled.input`
-  width: 100%;
-  height: 60px;
-  border: 1px solid ${({ theme }) => theme.borderColor};
-  padding: 14px;
-  box-sizing: border-box;
-  font-size: 18px;
-`;
-
-export const EtcTextarea = styled.textarea`
-  width: 100%;
-  height: 400px;
-  border: 1px solid ${({ theme }) => theme.borderColor};
-  resize: none;
-  padding: 14px;
-  box-sizing: border-box;
-  font-size: 18px;
 `;

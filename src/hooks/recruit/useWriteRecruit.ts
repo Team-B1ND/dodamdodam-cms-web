@@ -5,13 +5,20 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { QUERY_KEYS } from "../../queries/queryKey";
 import { usePostRecruitMutation } from "../../queries/recruit/recruit.query";
-import { recruitImageAtom } from "../../store/recruitWrite/recuritWriteAtom";
+import {
+  recruitImageAtom,
+  recruitPdfFileNameAtom,
+} from "../../store/recruitWrite/recuritWriteAtom";
 
 const useWriteRecruit = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const [recruitImage, setRecruitImage] = useRecoilState(recruitImageAtom);
+
+  const [recruitPdfFileNames, setRecruitPdfFileNames] = useRecoilState(
+    recruitPdfFileNameAtom
+  );
   const [textContent, setTextContent] = useState({
     etc: "",
     companyName: "",
@@ -45,10 +52,12 @@ const useWriteRecruit = () => {
         image: recruitImage,
         etc,
         companyName,
+        pdfUrl: [...recruitPdfFileNames],
       },
       {
         onSuccess: () => {
           setRecruitImage("");
+          setRecruitPdfFileNames([]);
           setTextContent({ etc: "", companyName: "" });
           queryClient.invalidateQueries(QUERY_KEYS.recruit.getRecruits);
           navigate("/recruit");

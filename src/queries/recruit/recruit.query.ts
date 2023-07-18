@@ -1,6 +1,8 @@
 import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
 import {
+  GetRecruitFileNamesParam,
+  GetRecruitFileNamesResponse,
   GetRecruitParam,
   GetRecruitResponse,
   GetRecruitsResponse,
@@ -34,6 +36,25 @@ export const useGetRecruitQuery = (
   useQuery(
     QUERY_KEYS.recruit.getRecruit(id),
     () => RecruitRepositoryImpl.getRecruit({ id }),
+    {
+      enabled: !!id,
+      ...options,
+    }
+  );
+
+export const useGetRecruitFileNamesQuery = (
+  { id }: GetRecruitFileNamesParam,
+  options?: UseQueryOptions<
+    GetRecruitFileNamesResponse,
+    AxiosError,
+    GetRecruitFileNamesResponse,
+    (string | number)[]
+  >
+) =>
+  useQuery(
+    QUERY_KEYS.recruit.getRecruitFileNames(id),
+    () => RecruitRepositoryImpl.getRecruitFileNames({ id }),
+
     {
       enabled: !!id,
       ...options,

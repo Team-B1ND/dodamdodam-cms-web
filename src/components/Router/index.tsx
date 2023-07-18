@@ -6,7 +6,10 @@ import RecruitDetailPage from "../../pages/RecruitDetailPage";
 import RecruitPage from "../../pages/RecruitPage";
 import RecruitWritePage from "../../pages/RecruitWritePage";
 import WritePage from "../../pages/WritePage";
-import { recruitImageAtom } from "../../store/recruitWrite/recuritWriteAtom";
+import {
+  recruitImageAtom,
+  recruitPdfFileNameAtom,
+} from "../../store/recruitWrite/recuritWriteAtom";
 import withAuth from "../HOC/withAuth";
 
 const Router = () => {
@@ -18,9 +21,11 @@ const Router = () => {
 
   const navigate = useNavigate();
   const resetRecruitImage = useResetRecoilState(recruitImageAtom);
+  const resetRecruitPdfFileNames = useResetRecoilState(recruitPdfFileNameAtom);
 
   useEffect(() => {
     resetRecruitImage();
+    resetRecruitPdfFileNames();
   }, [navigate]);
 
   return (

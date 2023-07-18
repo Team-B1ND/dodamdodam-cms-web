@@ -12,6 +12,7 @@ export const customAxios = axios.create({
   baseURL: config.DODAM_SERVER_V6,
   headers: {
     [REQUEST_TOKEN_KEY]: `Bearer ${Cookie.get(ACCESS_TOKEN_KEY)}`,
+    "Access-Control-Allow-Origin": "*",
   },
 });
 

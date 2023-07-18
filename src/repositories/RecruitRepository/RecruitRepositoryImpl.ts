@@ -1,6 +1,8 @@
 import { customAxios } from "../../lib/axios/customAxios";
 import {
   DeleteRecruitParam,
+  GetRecruitFileNamesParam,
+  GetRecruitFileNamesResponse,
   GetRecruitParam,
   GetRecruitResponse,
   GetRecruitsResponse,
@@ -19,6 +21,13 @@ class RecruitRepositoryImpl implements RecruitRepository {
     id,
   }: GetRecruitParam): Promise<GetRecruitResponse> {
     const { data } = await customAxios.get(`/recruit/${id}`);
+    return data;
+  }
+
+  public async getRecruitFileNames({
+    id,
+  }: GetRecruitFileNamesParam): Promise<GetRecruitFileNamesResponse> {
+    const { data } = await customAxios.get(`/recruit/file/${id}`);
     return data;
   }
 

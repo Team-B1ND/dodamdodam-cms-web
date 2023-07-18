@@ -1,10 +1,14 @@
-import { Recruit } from "../../types/recruit/recruit.type";
+import { Recruit, RecruitFile } from "../../types/recruit/recruit.type";
 import { Response } from "../../types/util/response.type";
 
 export interface RecruitRepository {
   getRecruits(): Promise<GetRecruitsResponse>;
 
   getRecruit({ id }: GetRecruitParam): Promise<GetRecruitResponse>;
+
+  getRecruitFileNames({
+    id,
+  }: GetRecruitFileNamesParam): Promise<GetRecruitFileNamesResponse>;
 
   postRecruit(params: PostRecruitParam): Promise<void>;
 
@@ -25,11 +29,23 @@ export interface GetRecruitResponse extends Response {
   data: Recruit;
 }
 
+export interface GetRecruitFileNamesResponse extends Response {
+  data: RecruitFile[];
+}
+
+export interface GetRecruitFileNamesParam {
+  id: number;
+}
+
 export interface PostRecruitParam
-  extends Pick<Recruit, "image" | "etc" | "companyName"> {}
+  extends Pick<Recruit, "image" | "etc" | "companyName"> {
+  pdfUrl: string[];
+}
 
 export interface PatchRecruitParam
-  extends Pick<Recruit, "image" | "etc" | "companyName" | "id"> {}
+  extends Pick<Recruit, "image" | "etc" | "companyName" | "id"> {
+  pdfUrl: string[];
+}
 
 export interface DeleteRecruitParam {
   id: number;
