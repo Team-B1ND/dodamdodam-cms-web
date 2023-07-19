@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { ellipsisLine } from "@b1nd/b1nd-styled-components-util";
 import { palette } from "../../../styles/paletts";
+import { ellipsisLine } from "@b1nd/b1nd-styled-components-util";
 
 export const Container = styled.div`
   min-width: 15%;

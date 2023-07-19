@@ -39,8 +39,6 @@ const RecruitDetailContent = () => {
 
   const navigate = useNavigate();
 
-  console.log(serverRecruitFileNamesData);
-
   return (
     <S.Wrap>
       <S.TopWrap>
@@ -71,7 +69,7 @@ const RecruitDetailContent = () => {
       </S.TopWrap>
       <S.RecruitImage src={serverRecruitData?.data.image} />
       {serverRecruitFileNamesData?.data.map((fileName) => (
-        <S.RecruitFileNameBox>{fileName.pdfUrl}</S.RecruitFileNameBox>
+        <S.RecruitFileNameBox>{fileName.pdfName}</S.RecruitFileNameBox>
       ))}
       <S.EtcContent>{serverRecruitData?.data.etc}</S.EtcContent>
     </S.Wrap>

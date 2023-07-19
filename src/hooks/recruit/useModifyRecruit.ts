@@ -10,7 +10,7 @@ import {
 } from "../../queries/recruit/recruit.query";
 import {
   recruitImageAtom,
-  recruitPdfFileNameAtom,
+  recruitPdfFileAtom,
 } from "../../store/recruitWrite/recuritWriteAtom";
 
 interface Props {
@@ -43,9 +43,8 @@ const useModifyRecruit = ({ recruitId }: Props) => {
 
   const [recruitImage, setRecruitImage] = useRecoilState(recruitImageAtom);
 
-  const [recruitPdfFileNames, setRecruitPdfFileNames] = useRecoilState(
-    recruitPdfFileNameAtom
-  );
+  const [recruitPdfFileNames, setRecruitPdfFileNames] =
+    useRecoilState(recruitPdfFileAtom);
 
   const { data: serverRecruitData } = useGetRecruitQuery({
     id: Number(recruitId),

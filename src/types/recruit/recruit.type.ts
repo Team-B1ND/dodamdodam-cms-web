@@ -13,4 +13,5 @@ export interface Recruit {
 export interface RecruitFile {
   readonly id: number;
   pdfUrl: string;
+  pdfName: string;
 }

@@ -7,7 +7,7 @@ import { QUERY_KEYS } from "../../queries/queryKey";
 import { usePostRecruitMutation } from "../../queries/recruit/recruit.query";
 import {
   recruitImageAtom,
-  recruitPdfFileNameAtom,
+  recruitPdfFileAtom,
 } from "../../store/recruitWrite/recuritWriteAtom";
 
 const useWriteRecruit = () => {
@@ -16,9 +16,8 @@ const useWriteRecruit = () => {
 
   const [recruitImage, setRecruitImage] = useRecoilState(recruitImageAtom);
 
-  const [recruitPdfFileNames, setRecruitPdfFileNames] = useRecoilState(
-    recruitPdfFileNameAtom
-  );
+  const [recruitPdfFileNames, setRecruitPdfFileNames] =
+    useRecoilState(recruitPdfFileAtom);
   const [textContent, setTextContent] = useState({
     etc: "",
     companyName: "",
@@ -52,7 +51,7 @@ const useWriteRecruit = () => {
         image: recruitImage,
         etc,
         companyName,
-        pdfUrl: [...recruitPdfFileNames],
+        pdf: [...recruitPdfFileNames],
       },
       {
         onSuccess: () => {

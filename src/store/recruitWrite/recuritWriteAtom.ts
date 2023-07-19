@@ -5,7 +5,7 @@ export const recruitImageAtom = atom<string>({
   default: "",
 });
 
-export const recruitPdfFileNameAtom = atom<string[]>({
-  key: "recuritWrite/recruitPdfAtom",
+export const recruitPdfFileAtom = atom<{ url: string; name: string }[]>({
+  key: "recuritWrite/recruitPdfFileAtom",
   default: [],
 });

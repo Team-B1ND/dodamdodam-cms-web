@@ -1,12 +1,11 @@
 import { ChangeEvent, useCallback, useState } from "react";
 import { useRecoilState } from "recoil";
 import { usePostUploadMutation } from "../../queries/upload/upload.query";
-import { recruitPdfFileNameAtom } from "../../store/recruitWrite/recuritWriteAtom";
+import { recruitPdfFileAtom } from "../../store/recruitWrite/recuritWriteAtom";
 
 const useUploadRecruitPdf = () => {
-  const [recuritPdfFileNames, setRecruitPdfFileNames] = useRecoilState(
-    recruitPdfFileNameAtom
-  );
+  const [recuritPdfFileNames, setRecruitPdfFileNames] =
+    useRecoilState(recruitPdfFileAtom);
 
   const [tempRecruitPdfFileNames, setTempRecruitPdfFileNames] = useState<
     {
@@ -30,7 +29,10 @@ const useUploadRecruitPdf = () => {
           { formData },
           {
             onSuccess: (data) => {
-              setRecruitPdfFileNames((prev) => [...prev, data.data]);
+              setRecruitPdfFileNames((prev) => [
+                ...prev,
+                { url: data.data, name: file.name },
+              ]);
               setTempRecruitPdfFileNames((prev) => [
                 ...prev,
                 { fileName: file.name, processedFileName: data.data },
@@ -91,7 +93,7 @@ const useUploadRecruitPdf = () => {
     );
 
     setRecruitPdfFileNames((prev) =>
-      prev.filter((item) => item !== selectFile?.processedFileName)
+      prev.filter((item) => item.url !== selectFile?.processedFileName)
     );
 
     setTempRecruitPdfFileNames((prev) =>

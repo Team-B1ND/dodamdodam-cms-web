@@ -39,7 +39,10 @@ export interface GetRecruitFileNamesParam {
 
 export interface PostRecruitParam
   extends Pick<Recruit, "image" | "etc" | "companyName"> {
-  pdfUrl: string[];
+  pdf: {
+    url: string;
+    name: string;
+  }[];
 }
 
 export interface PatchRecruitParam

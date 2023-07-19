@@ -34,8 +34,8 @@ export const RecruitImage = styled.img`
 
 export const RecruitFileNameBox = styled.p`
   width: 100%;
-  padding: 25px;
-  font-size: 22px;
+  padding: 10px;
+  font-size: 14px;
   background-color: ${({ theme }) => theme.backgroundColor4};
   border: 1px solid ${({ theme }) => theme.borderColor};
   ${ellipsisLine(1)};
