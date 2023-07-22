@@ -39,7 +39,7 @@ const RecruitWrite = () => {
             placeholder={"추가 사항을 적어주세요"}
             name="etc"
           />
-          <RecruitUploadPdf />
+          <RecruitUploadPdf id={id!!} />
           <SubmitButton onClick={id ? onSubmitModifyContent : onSubmitRecurit}>
             제출
           </SubmitButton>

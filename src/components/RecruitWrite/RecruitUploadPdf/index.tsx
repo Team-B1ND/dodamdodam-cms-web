@@ -3,8 +3,14 @@ import { FiUpload } from "@react-icons/all-files/fi/FiUpload";
 import RecruitPdfUploadItem from "../RecuritPdfUploadItem";
 import useUploadRecruitPdf from "../../../hooks/recruit/useUploadPdf";
 
-const RecruitUploadPdf = () => {
-  const { selectedPdfFiles, onPushPdf, onDeletePdf } = useUploadRecruitPdf();
+interface Props {
+  id: string;
+}
+
+const RecruitUploadPdf = ({ id }: Props) => {
+  const { selectedPdfFiles, onPushPdf, onDeletePdf } = useUploadRecruitPdf(
+    Number(id)
+  );
 
   return (
     <S.Container>

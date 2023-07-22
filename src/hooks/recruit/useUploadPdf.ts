@@ -2,10 +2,14 @@ import { ChangeEvent, useCallback, useState } from "react";
 import { useRecoilState } from "recoil";
 import { usePostUploadMutation } from "../../queries/upload/upload.query";
 import { recruitPdfFileAtom } from "../../store/recruitWrite/recuritWriteAtom";
+import { B1ndToast } from "@b1nd/b1nd-toastify";
+import { useGetRecruitFileNamesQuery } from "../../queries/recruit/recruit.query";
 
-const useUploadRecruitPdf = () => {
+const useUploadRecruitPdf = (id: number) => {
   const [recuritPdfFileNames, setRecruitPdfFileNames] =
     useRecoilState(recruitPdfFileAtom);
+
+  const { data: pdfFile } = useGetRecruitFileNamesQuery({ id });
 
   const [tempRecruitPdfFileNames, setTempRecruitPdfFileNames] = useState<
     {
@@ -55,6 +59,17 @@ const useUploadRecruitPdf = () => {
           files.push(file);
         }
 
+        if (id) {
+          const duplicatesExist = files.some((fileItem) =>
+            pdfFile?.data.some((item) => item.pdfName === fileItem.name)
+          );
+
+          if (duplicatesExist) {
+            B1ndToast.showInfo("중복된 pdf입니다.");
+            return;
+          }
+        }
+
         if (recuritPdfFileNames.length === 0) {
           setSelectedRecruitPdfFiles(files);
           files.map((item) => changedFiles.push(item));
@@ -77,7 +92,6 @@ const useUploadRecruitPdf = () => {
           ]);
         }
       }
-
       uploadFiles(changedFiles);
     },
     [recuritPdfFileNames.length, selectedRecruitPdfFiles, uploadFiles]

@@ -100,11 +100,13 @@ const useModifyRecruit = ({ recruitId }: Props) => {
       {
         id: recruitId!,
         ...modifyRecruitData,
-        pdfUrl: modifyRecruitFileNames,
+        pdf: recruitPdfFileNames,
       },
       {
         onSuccess: () => {
           B1ndToast.showSuccess("수정하였습니다.");
+          setModifyRecruitData({ image: "", companyName: "", etc: "" });
+          setRecruitPdfFileNames([]);
           queryClient.invalidateQueries(
             QUERY_KEYS.recruit.getRecruit(recruitId!)
           );

@@ -47,7 +47,10 @@ export interface PostRecruitParam
 
 export interface PatchRecruitParam
   extends Pick<Recruit, "image" | "etc" | "companyName" | "id"> {
-  pdfUrl: string[];
+  pdf: {
+    url: string;
+    name: string;
+  }[];
 }
 
 export interface DeleteRecruitParam {
