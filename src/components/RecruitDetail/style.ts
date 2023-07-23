@@ -40,6 +40,7 @@ export const RecruitFileNameBox = styled.p`
   border: 1px solid ${({ theme }) => theme.borderColor};
   ${ellipsisLine(1)};
   box-sizing: border-box;
+  cursor: pointer;
 `;
 
 export const EtcContent = styled.pre`

@@ -12,12 +12,15 @@ import {
   recruitImageAtom,
   recruitPdfFileAtom,
 } from "../../store/recruitWrite/recuritWriteAtom";
+import { RecruitFile } from "../../types/recruit/recruit.type";
+import { GetRecruitFileNamesResponse } from "../../repositories/RecruitRepository/RecruitRepository";
 
 interface Props {
   recruitId: number | undefined;
+  pdfFile: GetRecruitFileNamesResponse | undefined;
 }
 
-const useModifyRecruit = ({ recruitId }: Props) => {
+const useModifyRecruit = ({ recruitId, pdfFile }: Props) => {
   const queryClient = useQueryClient();
 
   const navigate = useNavigate();
@@ -29,6 +32,9 @@ const useModifyRecruit = ({ recruitId }: Props) => {
     companyName: "",
     etc: "",
   });
+  const [originPdf, setOriginPdf] = useState<{ url: string; name: string }[]>(
+    []
+  );
 
   const [modifyRecruitData, setModifyRecruitData] = useState({
     image: "",
@@ -39,6 +45,7 @@ const useModifyRecruit = ({ recruitId }: Props) => {
   const [prevModifyRecruitFileNames, setPrevModifyRecruitFileNames] = useState(
     []
   );
+
   const [modifyRecruitFileNames, setModifyRecruitFileNames] = useState([]);
 
   const [recruitImage, setRecruitImage] = useRecoilState(recruitImageAtom);
@@ -51,7 +58,7 @@ const useModifyRecruit = ({ recruitId }: Props) => {
   });
 
   useEffect(() => {
-    if (recruitId && serverRecruitData) {
+    if (recruitId && serverRecruitData && pdfFile) {
       const { image, etc, companyName } = serverRecruitData.data;
 
       setPrevModifyRecruitData({
@@ -66,8 +73,22 @@ const useModifyRecruit = ({ recruitId }: Props) => {
       });
       setRecruitImage(serverRecruitData.data.image);
       // setRecruitPdfFileNames(serverRecruitData.data.pdfUrl);
+
+      const recruitChangePdfFiles = pdfFile.data.map(
+        (recruitFile: RecruitFile) => ({
+          url: recruitFile.pdfUrl,
+          name: recruitFile.pdfName,
+        })
+      );
+      setOriginPdf(recruitChangePdfFiles);
     }
-  }, [serverRecruitData, setRecruitImage, recruitId, setRecruitPdfFileNames]);
+  }, [
+    serverRecruitData,
+    setRecruitImage,
+    recruitId,
+    setRecruitPdfFileNames,
+    pdfFile,
+  ]);
 
   const onChangeModifyContent = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -78,14 +99,6 @@ const useModifyRecruit = ({ recruitId }: Props) => {
   };
 
   const onSubmitModifyContent = () => {
-    if (
-      Object.entries(prevModifyRecruitData).toString() ===
-      Object.entries(modifyRecruitData).toString()
-    ) {
-      B1ndToast.showInfo("변경된 사항이 없습니다.");
-      return;
-    }
-
     if (recruitImage === "") {
       B1ndToast.showInfo("이미지를 추가해주세요.");
       return;
@@ -96,11 +109,31 @@ const useModifyRecruit = ({ recruitId }: Props) => {
       return;
     }
 
+    if (modifyRecruitData.etc === "") {
+      B1ndToast.showInfo("내용을 추가해주세요.");
+      return;
+    }
+
+    if (
+      prevModifyRecruitData.companyName === modifyRecruitData.companyName &&
+      prevModifyRecruitData.etc === modifyRecruitData.etc &&
+      prevModifyRecruitData.image === recruitImage &&
+      recruitPdfFileNames.length === 0 // 게시물 수정페이지에 들어오면 recruitPdfFileNames는 처음값이 0이다.
+    ) {
+      B1ndToast.showInfo("변경된 사항이 없습니다.");
+      return;
+    }
+
     patchRecruitMutation.mutate(
       {
         id: recruitId!,
-        ...modifyRecruitData,
-        pdf: recruitPdfFileNames,
+        image: recruitImage,
+        etc: modifyRecruitData.etc,
+        companyName: modifyRecruitData.companyName,
+        pdf:
+          recruitPdfFileNames.length === 0
+            ? [...originPdf]
+            : [...recruitPdfFileNames],
       },
       {
         onSuccess: () => {

@@ -1,15 +1,18 @@
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { usePostUploadMutation } from "../../queries/upload/upload.query";
 import { recruitPdfFileAtom } from "../../store/recruitWrite/recuritWriteAtom";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
-import { useGetRecruitFileNamesQuery } from "../../queries/recruit/recruit.query";
+import { GetRecruitFileNamesResponse } from "../../repositories/RecruitRepository/RecruitRepository";
 
-const useUploadRecruitPdf = (id: number) => {
+interface Props {
+  id: number;
+  pdfFile: GetRecruitFileNamesResponse;
+}
+
+const useUploadRecruitPdf = ({ id, pdfFile }: Props) => {
   const [recuritPdfFileNames, setRecruitPdfFileNames] =
     useRecoilState(recruitPdfFileAtom);
-
-  const { data: pdfFile } = useGetRecruitFileNamesQuery({ id });
 
   const [tempRecruitPdfFileNames, setTempRecruitPdfFileNames] = useState<
     {

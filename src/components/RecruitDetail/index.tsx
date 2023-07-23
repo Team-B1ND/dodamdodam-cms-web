@@ -69,7 +69,12 @@ const RecruitDetailContent = () => {
       </S.TopWrap>
       <S.RecruitImage src={serverRecruitData?.data.image} />
       {serverRecruitFileNamesData?.data.map((fileName) => (
-        <S.RecruitFileNameBox>{fileName.pdfName}</S.RecruitFileNameBox>
+        <S.RecruitFileNameBox
+          key={fileName.id}
+          onClick={() => window.open(fileName.pdfUrl, "_blank")}
+        >
+          {fileName.pdfName}
+        </S.RecruitFileNameBox>
       ))}
       <S.EtcContent>{serverRecruitData?.data.etc}</S.EtcContent>
     </S.Wrap>

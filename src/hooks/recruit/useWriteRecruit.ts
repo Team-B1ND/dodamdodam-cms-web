@@ -46,6 +46,11 @@ const useWriteRecruit = () => {
       return;
     }
 
+    if (etc === "") {
+      B1ndToast.showInfo("내용을 추가해주세요.");
+      return;
+    }
+
     postRecruitMutation.mutate(
       {
         image: recruitImage,
