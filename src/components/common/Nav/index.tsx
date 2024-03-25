@@ -20,9 +20,9 @@ const Nav = () => {
     <NavContainer isFold={isFold}>
       <NavLogoWrap isFold={isFold}>
         <NavLogoImg src={DodamTextLogo} isFold={isFold} />
-        <NavMenuIcon isFold={isFold} onClick={() => setIsFold((prev) => !prev)}>
+        {/* <NavMenuIcon isFold={isFold} onClick={() => setIsFold((prev) => !prev)}>
           {isFold ? <HiMenu /> : <IoCloseSharp />}
-        </NavMenuIcon>
+        </NavMenuIcon> */}
       </NavLogoWrap>
       <NavMenuItemWrap>
         {NAV_ITEMS.map((item) => (
