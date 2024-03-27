@@ -34,14 +34,10 @@ const RecruitUploadForm = () => {
     useUploadRecruitImage();
   const [pdfImgUrl, setPdfImgUrl] = useRecoilState(imgUrlAtom);
   const [recruitPdfdata, setRecruitPdfData] = useRecoilState(recruitPdfAtom);
-  const {
-    onSubmitModifyContent,
-    onChangeModifyContent,
-    modifyRecruitData,
-    setModifyRecruitData,
-  } = useModifyRecruit({
-    recruitId: Number(id),
-  });
+  const { onSubmitModifyContent, onChangeModifyContent, modifyRecruitData } =
+    useModifyRecruit({
+      recruitId: Number(id),
+    });
 
   return (
     <S.Container>
@@ -107,7 +103,6 @@ const RecruitUploadForm = () => {
               <S.JobListBox>
                 {JobList.map((job) => {
                   const isSelected = selectJob.includes(job);
-
                   return (
                     <S.JobList
                       onClick={() =>
