@@ -3,7 +3,7 @@ import { GetMyMemberResponse, MemberRepository } from "./MemberRepository";
 
 class MemberRepositoryImpl implements MemberRepository {
   public async getMyMember(): Promise<GetMyMemberResponse> {
-    const { data } = await customAxios.get("/members/my");
+    const { data } = await customAxios.get("/member/my");
     return data;
   }
 }

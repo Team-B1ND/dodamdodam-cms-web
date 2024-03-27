@@ -1,5 +1,4 @@
 import axios from "axios";
-// import config from "../../config/config.json";
 import config from "../../config/config.json";
 import {
   ACCESS_TOKEN_KEY,
@@ -10,7 +9,7 @@ import { requestInterceptor } from "./requestInterceptor";
 import { responseErrorInterceptor } from "./responseInterceptor";
 
 export const customAxios = axios.create({
-  baseURL: config.DODAM_SERVER_V6,
+  baseURL: config.DODAM_TEST_SERVER,
   headers: {
     [REQUEST_TOKEN_KEY]: `Bearer ${Cookie.get(ACCESS_TOKEN_KEY)}`,
   },
