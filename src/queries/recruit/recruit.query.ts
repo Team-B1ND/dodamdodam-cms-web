@@ -2,9 +2,9 @@ import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
 import {
   GetRecruitParam,
-  // GetRecruitResponse,
   GetRecruitResponese,
   GetRecruitListResponese,
+  PostRecruitParam,
 } from "../../repositories/RecruitRepository/RecruitRepository";
 import RecruitRepositoryImpl from "../../repositories/RecruitRepository/RecruitRepositoryImpl";
 import { QUERY_KEYS } from "../queryKey";
@@ -19,7 +19,7 @@ export const useGetRecruitsQuery = (
   >
 ) =>
   useQuery(
-    QUERY_KEYS.recruit.getRecruits(page),
+    QUERY_KEYS.recruit.getRecruitList(page),
     () => RecruitRepositoryImpl.getRecruitList(page),
     { ...options }
   );
@@ -48,7 +48,10 @@ export const usePostRecruitMutation = () => {
 };
 
 export const usePatchRecruitMutation = () => {
-  const mutation = useMutation(RecruitRepositoryImpl.patchRecruit);
+  const mutation = useMutation(
+    (params: { PatchData: PostRecruitParam; id: number }) =>
+      RecruitRepositoryImpl.patchRecruit(params.PatchData, params.id)
+  );
   return mutation;
 };
 

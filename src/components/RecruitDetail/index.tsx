@@ -7,6 +7,7 @@ import { CgTrashEmpty } from "@react-icons/all-files/cg/CgTrashEmpty";
 import useDeleteRecruit from "../../hooks/recruit/useDeleteRecruit";
 import { IoPerson } from "react-icons/io5";
 import { RiComputerFill } from "react-icons/ri";
+import { HiOutlinePencil } from "react-icons/hi";
 
 const RecruitDetail = () => {
   return (
@@ -35,13 +36,13 @@ const RecruitDetailContent = () => {
             onToggle={() => setIsOpen((prev) => !prev)}
           >
             <MenuDropdown.Buttons>
-              {/* <MenuDropdown.Button
+              <MenuDropdown.Button
                 buttonType="NORMAL"
                 onClick={() => navigate(`/recruitwrite/${id}`)}
               >
                 <MenuDropdown.Button.Icon icon={<HiOutlinePencil />} />
                 수정
-              </MenuDropdown.Button> */}
+              </MenuDropdown.Button>
               <MenuDropdown.Button
                 buttonType="DELETE"
                 onClick={() => onDelete(Number(id))}

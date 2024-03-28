@@ -2,10 +2,14 @@ import { Response } from "../../types/util/response.type";
 
 export interface RecruitRepository {
   getRecruitList(page: number): Promise<GetRecruitListResponese>;
+
   getRecruit({ id }: GetRecruitParam): Promise<GetRecruitResponese>;
+
   postRecruit(params: PostRecruitParam): Promise<void>;
-  patchRecruit(params: PostRecruitParam): Promise<void>;
-  deleteRecruit({ id }: GetRecruitParam): Promise<void>;
+
+  patchRecruit(params: PostRecruitParam, id: number): Promise<void>;
+
+  deleteRecruit({ id }: DeleteRecruitParam): Promise<void>;
 }
 
 export interface GetRecruitListResponese extends Response {
@@ -48,7 +52,7 @@ export interface PostRecruitParam {
   location: string;
   duty: string;
   etc: string;
-  personnel: number;
+  personnel: string | number;
   image: string;
   pdfs: RecruitPdfParam[];
 }
@@ -56,4 +60,8 @@ export interface PostRecruitParam {
 export interface RecruitPdfParam {
   url: string;
   name: string;
+}
+
+export interface DeleteRecruitParam {
+  id: number;
 }

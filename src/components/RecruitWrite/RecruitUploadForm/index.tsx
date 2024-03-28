@@ -34,6 +34,7 @@ const RecruitUploadForm = () => {
     useUploadRecruitImage();
   const [pdfImgUrl, setPdfImgUrl] = useRecoilState(imgUrlAtom);
   const [recruitPdfdata, setRecruitPdfData] = useRecoilState(recruitPdfAtom);
+
   const { onSubmitModifyContent, onChangeModifyContent, modifyRecruitData } =
     useModifyRecruit({
       recruitId: Number(id),

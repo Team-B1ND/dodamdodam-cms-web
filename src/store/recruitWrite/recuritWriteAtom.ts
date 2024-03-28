@@ -1,5 +1,8 @@
 import { atom } from "recoil";
-import { RecruitPdfParam } from "../../repositories/RecruitRepository/RecruitRepository";
+import {
+  PostRecruitParam,
+  RecruitPdfParam,
+} from "../../repositories/RecruitRepository/RecruitRepository";
 
 export const recruitPdfAtom = atom<RecruitPdfParam[]>({
   key: "recruitPdfAtom",
@@ -9,4 +12,17 @@ export const recruitPdfAtom = atom<RecruitPdfParam[]>({
 export const imgUrlAtom = atom<string>({
   key: "imgUrlAtom",
   default: "",
+});
+
+export const ModifyRecrutAtom = atom<PostRecruitParam>({
+  key: "ModifyRecrutAtom",
+  default: {
+    name: "",
+    location: "",
+    duty: "",
+    etc: "",
+    personnel: 0,
+    image: "",
+    pdfs: [] as RecruitPdfParam[],
+  },
 });
