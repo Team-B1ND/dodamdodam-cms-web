@@ -2,22 +2,22 @@ import { customAxios } from "../../lib/axios/customAxios";
 import {
   DeleteRecruitParam,
   GetRecruitParam,
-  GetRecruitResponse,
-  GetRecruitsResponse,
+  // GetRecruitResponse,
+  GetRecruitResponese,
   // PatchRecruitParam,
   PostRecruitParam,
   RecruitRepository,
 } from "./RecruitRepository";
 
 class RecruitRepositoryImpl implements RecruitRepository {
-  public async getRecruits(page: number): Promise<GetRecruitsResponse> {
+  public async getRecruits(page: number): Promise<GetRecruitResponese> {
     const { data } = await customAxios.get(`/recruit?page=${page}`);
     return data;
   }
 
   public async getRecruit({
     id,
-  }: GetRecruitParam): Promise<GetRecruitResponse> {
+  }: GetRecruitParam): Promise<GetRecruitResponese> {
     const { data } = await customAxios.get(`/recruit/${id}`);
     return data;
   }

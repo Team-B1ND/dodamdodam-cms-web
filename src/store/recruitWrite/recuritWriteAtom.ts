@@ -6,7 +6,7 @@ export const recruitPdfAtom = atom<RecruitPdfParam[]>({
   default: [],
 });
 
-export const imgUrlAtom = atom<string[]>({
+export const imgUrlAtom = atom<string>({
   key: "imgUrlAtom",
-  default: [],
+  default: "",
 });
