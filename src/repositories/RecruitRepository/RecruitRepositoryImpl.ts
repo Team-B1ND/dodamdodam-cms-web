@@ -4,13 +4,14 @@ import {
   GetRecruitParam,
   // GetRecruitResponse,
   GetRecruitResponese,
+  GetRecruitListResponese,
   // PatchRecruitParam,
   PostRecruitParam,
   RecruitRepository,
 } from "./RecruitRepository";
 
 class RecruitRepositoryImpl implements RecruitRepository {
-  public async getRecruits(page: number): Promise<GetRecruitResponese> {
+  public async getRecruitList(page: number): Promise<GetRecruitListResponese> {
     const { data } = await customAxios.get(`/recruit?page=${page}`);
     return data;
   }

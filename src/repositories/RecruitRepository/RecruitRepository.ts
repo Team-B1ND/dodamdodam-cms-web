@@ -2,7 +2,7 @@ import { Recruit } from "../../types/recruit/recruit.type";
 import { Response } from "../../types/util/response.type";
 
 export interface RecruitRepository {
-  getRecruits(page: number): Promise<GetRecruitResponese>;
+  getRecruitList(page: number): Promise<GetRecruitListResponese>;
 
   getRecruit({ id }: GetRecruitParam): Promise<GetRecruitResponese>;
 
@@ -13,7 +13,7 @@ export interface RecruitRepository {
   deleteRecruit({ id }: DeleteRecruitParam): Promise<void>;
 }
 
-export interface GetRecruitResponese extends Response {
+export interface GetRecruitListResponese extends Response {
   data: {
     recruitList: [
       {
@@ -28,6 +28,19 @@ export interface GetRecruitResponese extends Response {
       }
     ];
     nextPage: null;
+  };
+}
+
+export interface GetRecruitResponese extends Response {
+  data: {
+    writer: string;
+    name: string;
+    location: string;
+    duty: string;
+    etc: string;
+    personnel: number;
+    image: string;
+    pdfs: RecruitPdfParam[];
   };
 }
 
