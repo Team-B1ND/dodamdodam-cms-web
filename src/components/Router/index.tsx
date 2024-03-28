@@ -5,7 +5,7 @@ import RecruitDetailPage from "../../pages/RecruitDetailPage";
 import RecruitPage from "../../pages/RecruitPage";
 import RecruitWritePage from "../../pages/RecruitWritePage";
 
-import { recruitImageAtom } from "../../store/recruitWrite/recuritWriteAtom";
+import { recruitPdfAtom } from "../../store/recruitWrite/recuritWriteAtom";
 import withAuth from "../HOC/withAuth";
 
 const Router = () => {
@@ -14,7 +14,7 @@ const Router = () => {
   const AuthRecruitDetailPage = withAuth(RecruitDetailPage);
 
   const navigate = useNavigate();
-  const resetRecruitImage = useResetRecoilState(recruitImageAtom);
+  const resetRecruitImage = useResetRecoilState(recruitPdfAtom);
 
   useEffect(() => {
     resetRecruitImage();

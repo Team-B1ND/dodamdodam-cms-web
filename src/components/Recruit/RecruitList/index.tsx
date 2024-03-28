@@ -1,39 +1,20 @@
-import { useState } from "react";
-import { useMemo } from "react";
 import { useGetRecruitsQuery } from "../../../queries/recruit/recruit.query";
-import NormalButton from "../../common/NormalButton";
 import SubmitButton from "../../common/SubmitButton";
 import RecruitItem from "../RecruitItem";
 import * as S from "./style";
 
 const RecruitList = () => {
-  const { data } = useGetRecruitsQuery({ suspense: true });
-
-  const createYears = useMemo(() => {
-    return new Set(data?.data.map((item) => item.createdDate.slice(0, 4)));
-  }, [data]);
-
-  const [selectedYear, setSelectedYear] = useState([...createYears][0]);
+  const { data: getRecruitList } = useGetRecruitsQuery(1, { suspense: true });
 
   return (
     <>
       <S.YearWrap>
-        {[...createYears].map((item) =>
-          item === selectedYear ? (
-            <SubmitButton key={item}>{item}</SubmitButton>
-          ) : (
-            <NormalButton key={item} onClick={() => setSelectedYear(item)}>
-              {item}
-            </NormalButton>
-          )
-        )}
+        <SubmitButton>2024</SubmitButton>
       </S.YearWrap>
       <S.Container>
-        {data?.data
-          .filter((recruit) => recruit.createdDate.slice(0, 4) === selectedYear)
-          .map((item) => (
-            <RecruitItem {...item}>{item}</RecruitItem>
-          ))}
+        {getRecruitList?.data.recruitList.map((key) => (
+          <RecruitItem {...key}>{key}</RecruitItem>
+        ))}
       </S.Container>
     </>
   );

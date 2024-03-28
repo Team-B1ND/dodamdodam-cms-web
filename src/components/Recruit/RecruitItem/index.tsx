@@ -1,18 +1,23 @@
 import { useNavigate } from "react-router-dom";
-import { Recruit } from "../../../types/recruit/recruit.type";
 import * as S from "./style";
 
-interface Props extends Recruit {}
+interface Props {
+  id: number;
+  writer: string;
+  name: string;
+  etc: string;
+  image: string;
+}
 
-const RecruitItem = ({ id, companyName, image, writer }: Props) => {
+const RecruitItem = ({ id, image, name, writer }: Props) => {
   const navigate = useNavigate();
 
   return (
     <S.Container onClick={() => navigate(`/recruit/${id}`)}>
       <S.RecruitImage src={image} />
       <S.RecruitDescriptionContainer>
-        <S.CompanyName>{companyName}</S.CompanyName>
-        <S.WriterName>{writer.name}</S.WriterName>
+        <S.CompanyName>{name}</S.CompanyName>
+        <S.WriterName>{writer}</S.WriterName>
       </S.RecruitDescriptionContainer>
     </S.Container>
   );

@@ -7,7 +7,10 @@ import { GiCancel } from "react-icons/gi";
 import { JobList } from "../../../constants/job/job.constant";
 import useUploadRecruitImage from "../../../hooks/recruit/useUploadRecruitImage";
 import { useRecoilState } from "recoil";
-import { imgUrlAtom } from "../../../store/recruitWrite/recuritWriteAtom";
+import {
+  imgUrlAtom,
+  recruitPdfAtom,
+} from "../../../store/recruitWrite/recuritWriteAtom";
 import { LuUpload } from "react-icons/lu";
 import { TiDelete } from "react-icons/ti";
 
@@ -18,7 +21,6 @@ const RecruitUploadForm = () => {
   const {
     onChangeContent,
     textContent,
-    setTextContent,
     handleJobDeselection,
     handleJobSelection,
     selectJob,
@@ -26,11 +28,10 @@ const RecruitUploadForm = () => {
     onSubmitRecurit,
   } = useWriteRecruit();
 
-  const { onChangePdf, UploadThumbnail, handleDeleteImage } =
+  const { onChangePdf, UploadThumbnail, handleDeletePdf } =
     useUploadRecruitImage();
   const [pdfImgUrl, setPdfImgUrl] = useRecoilState(imgUrlAtom);
-
-  console.log(pdfImgUrl);
+  const [recruitPdfdata, setRecruitPdfData] = useRecoilState(recruitPdfAtom);
 
   return (
     <S.Container>
@@ -38,25 +39,21 @@ const RecruitUploadForm = () => {
         <S.Title isBottom={16}>채용 공고 미리보기</S.Title>
 
         <S.PreviewBox>
-          {pdfImgUrl.length > 0 ? (
-            <>
-              {pdfImgUrl.map((image, id) => (
-                <div key={id}>
-                  <div
-                    onClick={() => handleDeleteImage(id)}
-                    style={{
-                      position: "absolute",
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      width: "32%",
-                    }}
-                  >
-                    <TiDelete color="red" size={50} />
-                  </div>
-                  <S.Img alt="preview" src={image} />
-                </div>
-              ))}
-            </>
+          {pdfImgUrl !== "" ? (
+            <div>
+              <div
+                onClick={() => setPdfImgUrl("")}
+                style={{
+                  position: "absolute",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  width: "32%",
+                }}
+              >
+                <TiDelete color="red" size={50} />
+              </div>
+              <S.Img alt="preview" src={pdfImgUrl} />
+            </div>
           ) : (
             <label htmlFor="thumbnail">
               <input
@@ -135,7 +132,7 @@ const RecruitUploadForm = () => {
                     marginTop: "-20px",
                   }}
                 >
-                  <S.SmailTitle>추가 사항</S.SmailTitle>
+                  <S.SmailTitle>직무</S.SmailTitle>
                   <div style={{ color: "black" }}>{selectJobList}</div>
                 </div>
               ) : (
@@ -185,7 +182,31 @@ const RecruitUploadForm = () => {
           </label>
         </S.UploadBox>
 
-        <S.RecruitUpload onClick={() => onSubmitRecurit()}>
+        {recruitPdfdata.length > 0 ? (
+          <div style={{ display: "flex", gap: "10px" }}>
+            {recruitPdfdata.map((key, id) => (
+              <S.PdfDataBox>
+                <div
+                  onClick={() => handleDeletePdf(id)}
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <TiDelete color="red" size={20} />
+                </div>
+                <S.PdfData>{key.name}</S.PdfData>
+              </S.PdfDataBox>
+            ))}
+          </div>
+        ) : (
+          ""
+        )}
+
+        <S.RecruitUpload
+          onClick={() => onSubmitRecurit()}
+          style={{ marginTop: recruitPdfdata.length > 0 ? "15px" : "30px" }}
+        >
           공고 올리기
         </S.RecruitUpload>
       </S.UploadContainer>

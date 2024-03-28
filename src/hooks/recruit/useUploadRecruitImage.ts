@@ -1,80 +1,69 @@
-import { ChangeEvent, useCallback, useState, DragEvent } from "react";
+import { ChangeEvent, useCallback } from "react";
 import { useRecoilState } from "recoil";
 import { usePostUploadMutation } from "../../queries/upload/upload.query";
-import { recruitImageAtom } from "../../store/recruitWrite/recuritWriteAtom";
+import {
+  imgUrlAtom,
+  recruitPdfAtom,
+} from "../../store/recruitWrite/recuritWriteAtom";
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 
 const useUploadRecruitImage = () => {
-  const [isDrag, setIsDrag] = useState(false);
-  const [, setRecruitImage] = useRecoilState(recruitImageAtom);
+  const [recruitPdfdata, setRecruitPdfData] = useRecoilState(recruitPdfAtom);
   const postUploadMutation = usePostUploadMutation();
+  const [pdfImgUrl, setPdfImgUrl] = useRecoilState(imgUrlAtom);
 
-  const onChangeImage = useCallback(
-    (e: ChangeEvent<HTMLInputElement> | any) => {
-      let image: File;
-      if (e.type === "drop") {
-        image = e.dataTransfer.files[0];
-      } else {
-        image = e.target.files[0];
-      }
-      const formData = new FormData();
-      formData.append("file", image);
+  const onChangePdf = useCallback(
+    async (e: ChangeEvent<HTMLInputElement>) => {
+      const fileList = e.target.files!!;
 
-      postUploadMutation.mutate(
-        { formData },
-        {
-          onSuccess: (data) => {
-            setRecruitImage(data.data);
-          },
-          onError: () => {
-            setRecruitImage("");
-          },
+      for (const file of Array.from(fileList)) {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+          const { data } = await postUploadMutation.mutateAsync({ formData });
+
+          setRecruitPdfData((prevPdfData) => [
+            ...prevPdfData,
+            { name: file.name, url: data },
+          ]);
+        } catch (error) {
+          B1ndToast.showError("파일 업로드에 실패했습니다.");
         }
-      );
-    },
-    [postUploadMutation, setRecruitImage]
-  );
-
-  const dropHandler = useCallback(
-    (e: DragEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setIsDrag(false);
-      if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-        onChangeImage(e);
-        e.dataTransfer.clearData();
       }
     },
-    [onChangeImage]
+    [postUploadMutation, setRecruitPdfData]
   );
 
-  const dragHandler = useCallback((e: DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const UploadThumbnail = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const fileList = e.target.files!!;
+    const formData = new FormData();
+    let imageUrlList = [...pdfImgUrl];
 
-    if (e.dataTransfer.files) {
-      setIsDrag(true);
+    formData.append("file", fileList[0]);
+
+    try {
+      const { data } = await postUploadMutation.mutateAsync({ formData });
+
+      const ImageUrls = URL.createObjectURL(fileList[0]);
+      imageUrlList.push(ImageUrls);
+
+      setPdfImgUrl(data);
+    } catch (error) {
+      B1ndToast.showError("파일 업로드에 실패했습니다.");
     }
-  }, []);
+  };
 
-  const dragInHandler = useCallback((e: DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-  }, []);
-
-  const dragOutHandler = useCallback((e: DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    setIsDrag(false);
-  }, []);
+  const handleDeletePdf = (id: number) => {
+    const newPdfUrlList = recruitPdfdata.filter((_, index) => index !== id);
+    setRecruitPdfData(newPdfUrlList);
+  };
 
   return {
-    dropHandler,
-    dragHandler,
-    dragInHandler,
-    dragOutHandler,
-    onChangeImage,
-    isDrag,
+    onChangePdf,
+    pdfImgUrl,
+    UploadThumbnail,
+    handleDeletePdf,
   };
 };
 

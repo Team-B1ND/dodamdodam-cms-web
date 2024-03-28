@@ -2,32 +2,33 @@ import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
 import {
   GetRecruitParam,
-  GetRecruitResponse,
-  GetRecruitsResponse,
+  // GetRecruitResponse,
+  GetRecruitResponese,
 } from "../../repositories/RecruitRepository/RecruitRepository";
 import RecruitRepositoryImpl from "../../repositories/RecruitRepository/RecruitRepositoryImpl";
 import { QUERY_KEYS } from "../queryKey";
 
 export const useGetRecruitsQuery = (
+  page: number,
   options?: UseQueryOptions<
-    GetRecruitsResponse,
+    GetRecruitResponese,
     AxiosError,
-    GetRecruitsResponse,
-    [string]
+    GetRecruitResponese,
+    (string | number)[]
   >
 ) =>
   useQuery(
-    [QUERY_KEYS.recruit.getRecruits],
-    RecruitRepositoryImpl.getRecruits,
+    QUERY_KEYS.recruit.getRecruits(page),
+    () => RecruitRepositoryImpl.getRecruits(page),
     { ...options }
   );
 
 export const useGetRecruitQuery = (
   { id }: GetRecruitParam,
   options?: UseQueryOptions<
-    GetRecruitResponse,
+    GetRecruitResponese,
     AxiosError,
-    GetRecruitResponse,
+    GetRecruitResponese,
     (string | number)[]
   >
 ) =>
@@ -45,10 +46,10 @@ export const usePostRecruitMutation = () => {
   return mutation;
 };
 
-export const usePatchRecruitMutation = () => {
-  const mutation = useMutation(RecruitRepositoryImpl.patchRecruit);
-  return mutation;
-};
+// export const usePatchRecruitMutation = () => {
+//   const mutation = useMutation(RecruitRepositoryImpl.patchRecruit);
+//   return mutation;
+// };
 
 export const useDeleteRecruitMutation = () => {
   const mutation = useMutation(RecruitRepositoryImpl.deleteRecruit);

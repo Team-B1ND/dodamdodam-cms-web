@@ -2,20 +2,43 @@ import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { ChangeEvent, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { QUERY_KEYS } from "../../queries/queryKey";
 import { usePostRecruitMutation } from "../../queries/recruit/recruit.query";
-import { recruitImageAtom } from "../../store/recruitWrite/recuritWriteAtom";
+import { PostRecruitParam } from "../../repositories/RecruitRepository/RecruitRepository";
+import { useRecoilState } from "recoil";
+import {
+  imgUrlAtom,
+  recruitPdfAtom,
+} from "../../store/recruitWrite/recuritWriteAtom";
 
 const useWriteRecruit = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [recruitPdfData, setRecruitPdfData] = useRecoilState(recruitPdfAtom);
+  const [pdfImgUrl, setPdfImgUrl] = useRecoilState(imgUrlAtom);
 
-  const [recruitImage, setRecruitImage] = useRecoilState(recruitImageAtom);
-  const [textContent, setTextContent] = useState({
+  const [textContent, setTextContent] = useState<PostRecruitParam>({
+    name: "",
+    location: "",
+    duty: "",
     etc: "",
-    companyName: "",
+    personnel: 0,
+    image: "",
+    pdfs: [],
   });
+
+  const [selectJob, setSelectJob] = useState<string[]>([]);
+
+  const handleJobSelection = (job: string) => {
+    if (!selectJob.includes(job)) {
+      setSelectJob((prev) => [...prev, job]);
+    }
+  };
+
+  const handleJobDeselection = (job: string) => {
+    setSelectJob((prev) => prev.filter((selectJob) => selectJob !== job));
+  };
+
+  const selectJobList = selectJob.join(",");
 
   const postRecruitMutation = usePostRecruitMutation();
 
@@ -23,36 +46,47 @@ const useWriteRecruit = () => {
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     const { name, value } = e.target;
-
     setTextContent((prev) => ({ ...prev, [name]: value }));
   };
 
   const onSubmitRecurit = () => {
-    if (recruitImage === "") {
-      B1ndToast.showInfo("이미지를 추가해주세요.");
+    const { name, location, etc, personnel } = textContent;
+    if (name === "") {
+      B1ndToast.showInfo("회사명을 입력해주세요");
       return;
     }
 
-    const { companyName, etc } = textContent;
-
-    if (companyName === "") {
-      B1ndToast.showInfo("회사명을 추가해주세요.");
+    if (location === "") {
+      B1ndToast.showInfo("회사 위치를 입력해주세요");
       return;
     }
 
+    if (selectJob == undefined) {
+      B1ndToast.showInfo("직무를 선택해주세요");
+    }
     postRecruitMutation.mutate(
       {
-        image: recruitImage,
-        etc,
-        companyName,
+        name: name,
+        location: location,
+        duty: selectJobList,
+        etc: etc,
+        personnel: personnel,
+        image: pdfImgUrl,
+        pdfs: recruitPdfData,
       },
       {
         onSuccess: () => {
-          setRecruitImage("");
-          setTextContent({ etc: "", companyName: "" });
-          queryClient.invalidateQueries(QUERY_KEYS.recruit.getRecruits);
+          setTextContent({
+            name: "",
+            location: "",
+            duty: "",
+            etc: "",
+            personnel: 0,
+            image: "",
+            pdfs: [],
+          });
           navigate("/recruit");
-          B1ndToast.showSuccess("작성하였습니다.");
+          B1ndToast.showSuccess("공고 등록 완료!");
         },
         onError: () => {
           B1ndToast.showError("에러가 발생하였습니다");
@@ -61,7 +95,16 @@ const useWriteRecruit = () => {
     );
   };
 
-  return { textContent, onChangeContent, onSubmitRecurit };
+  return {
+    textContent,
+    onChangeContent,
+    onSubmitRecurit,
+    setTextContent,
+    selectJob,
+    handleJobSelection,
+    handleJobDeselection,
+    selectJobList,
+  };
 };
 
 export default useWriteRecruit;

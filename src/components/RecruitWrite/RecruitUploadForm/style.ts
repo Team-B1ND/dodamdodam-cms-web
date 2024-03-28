@@ -62,8 +62,6 @@ export const RecruitUpload = styled.button`
   color: white;
 
   background-color: #5d8bff;
-
-  margin-top: 30px;
 `;
 
 export const UploadContainer = styled.div`
@@ -73,7 +71,7 @@ export const UploadContainer = styled.div`
 `;
 
 export const InputContainer = styled.div`
-  margin-top: 40px;
+  margin-top: 30px;
   margin-bottom: 30px;
 `;
 
@@ -159,11 +157,14 @@ export const Test = styled.div`
 export const SmailTitle = styled.p`
   font-size: 12px;
   color: #0f69f5;
+
+  margin-top: 1px;
+  margin-bottom: 6px;
 `;
 
 export const Img = styled.img`
   width: 580px;
-  height: 770px;
+  height: 780px;
 
   border-radius: 10px;
 `;
@@ -177,4 +178,29 @@ export const UploadIconBox = styled.div`
   gap: 15px;
 
   height: 100%;
+`;
+
+export const PdfDataBox = styled.div`
+  width: 80px;
+  height: 70px;
+  background-color: white;
+
+  border: 0.1px solid #e9e9e9;
+
+  border-radius: 4px;
+
+  margin-top: 10px;
+`;
+
+export const PdfData = styled.p`
+  padding: 2px 10px 0px 10px;
+  font-size: 12px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  user-select: none;
 `;

@@ -35,7 +35,7 @@ export const RecruitDescriptionContainer = styled.div`
   left: 0px;
   bottom: 0px;
   background-color: black;
-  opacity: 30%;
+  opacity: 50%;
   justify-content: space-between;
 `;
 

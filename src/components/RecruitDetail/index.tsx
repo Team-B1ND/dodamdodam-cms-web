@@ -30,7 +30,7 @@ const RecruitDetailContent = () => {
 
   return (
     <S.Wrap>
-      <S.TopWrap>
+      {/* <S.TopWrap>
         <S.CompanyName>{data?.data.companyName}</S.CompanyName>
         <MenuDropdown
           customStyle={{ width: 30, height: 30 }}
@@ -57,7 +57,7 @@ const RecruitDetailContent = () => {
         </MenuDropdown>
       </S.TopWrap>
       <S.RecruitImage src={data?.data.image} />
-      <S.EtcContent>{data?.data.etc}</S.EtcContent>
+      <S.EtcContent>{data?.data.etc}</S.EtcContent> */}
     </S.Wrap>
   );
 };

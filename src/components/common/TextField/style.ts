@@ -1,19 +1,19 @@
 import styled from "styled-components";
 
 export const TextFieldContainer = styled.div`
-  width: 334px;
+  width: 100%;
 
-  padding: 30px 0px 0px 4px;
+  padding: 30px 0px 0px 0px;
 
   position: relative;
 
   label {
     position: absolute;
 
-    left: 4px;
+    left: 0px;
     top: 80%;
 
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
 
     transform: translateY(-90%);
@@ -32,7 +32,7 @@ export const TextFieldContainer = styled.div`
   }
 `;
 export const TextFieldInput = styled.input`
-  width: 500px;
+  width: 496px;
   height: 45px;
 
   border: 0;

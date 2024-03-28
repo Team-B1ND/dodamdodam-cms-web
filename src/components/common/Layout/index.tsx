@@ -15,7 +15,7 @@ const Layout = ({ children }: Props) => {
         <Header />
         <S.ContentWrap>{children}</S.ContentWrap>
       </S.RightWrap>
-      <DarkmodeButton />
+      {/* <DarkmodeButton /> */}
     </S.Container>
   );
 };
