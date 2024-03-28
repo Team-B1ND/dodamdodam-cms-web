@@ -61,3 +61,7 @@ export interface RecruitPdfParam {
   url: string;
   name: string;
 }
+
+export interface DeleteRecruitParam {
+  id: number;
+}
