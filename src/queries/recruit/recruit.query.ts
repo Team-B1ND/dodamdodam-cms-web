@@ -2,32 +2,34 @@ import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
 import {
   GetRecruitParam,
-  GetRecruitResponse,
-  GetRecruitsResponse,
+  // GetRecruitResponse,
+  GetRecruitResponese,
+  GetRecruitListResponese,
 } from "../../repositories/RecruitRepository/RecruitRepository";
 import RecruitRepositoryImpl from "../../repositories/RecruitRepository/RecruitRepositoryImpl";
 import { QUERY_KEYS } from "../queryKey";
 
 export const useGetRecruitsQuery = (
+  page: number,
   options?: UseQueryOptions<
-    GetRecruitsResponse,
+    GetRecruitListResponese,
     AxiosError,
-    GetRecruitsResponse,
-    [string]
+    GetRecruitListResponese,
+    (string | number)[]
   >
 ) =>
   useQuery(
-    [QUERY_KEYS.recruit.getRecruits],
-    RecruitRepositoryImpl.getRecruits,
+    QUERY_KEYS.recruit.getRecruits(page),
+    () => RecruitRepositoryImpl.getRecruitList(page),
     { ...options }
   );
 
 export const useGetRecruitQuery = (
   { id }: GetRecruitParam,
   options?: UseQueryOptions<
-    GetRecruitResponse,
+    GetRecruitResponese,
     AxiosError,
-    GetRecruitResponse,
+    GetRecruitResponese,
     (string | number)[]
   >
 ) =>

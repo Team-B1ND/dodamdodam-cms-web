@@ -2,22 +2,23 @@ import { customAxios } from "../../lib/axios/customAxios";
 import {
   DeleteRecruitParam,
   GetRecruitParam,
-  GetRecruitResponse,
-  GetRecruitsResponse,
-  PatchRecruitParam,
+  // GetRecruitResponse,
+  GetRecruitResponese,
+  GetRecruitListResponese,
+  // PatchRecruitParam,
   PostRecruitParam,
   RecruitRepository,
 } from "./RecruitRepository";
 
 class RecruitRepositoryImpl implements RecruitRepository {
-  public async getRecruits(): Promise<GetRecruitsResponse> {
-    const { data } = await customAxios.get("/recruit/all");
+  public async getRecruitList(page: number): Promise<GetRecruitListResponese> {
+    const { data } = await customAxios.get(`/recruit?page=${page}`);
     return data;
   }
 
   public async getRecruit({
     id,
-  }: GetRecruitParam): Promise<GetRecruitResponse> {
+  }: GetRecruitParam): Promise<GetRecruitResponese> {
     const { data } = await customAxios.get(`/recruit/${id}`);
     return data;
   }
@@ -26,7 +27,7 @@ class RecruitRepositoryImpl implements RecruitRepository {
     await customAxios.post("/recruit", params);
   }
 
-  public async patchRecruit(params: PatchRecruitParam): Promise<void> {
+  public async patchRecruit(params: PostRecruitParam): Promise<void> {
     await customAxios.patch("/recruit", params);
   }
 

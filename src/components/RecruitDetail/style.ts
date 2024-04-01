@@ -1,41 +1,130 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  width: 100%;
+export const CompanyContainer = styled.div``;
+
+export const ImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 30px;
+`;
+
+export const CompanyImg = styled.img`
+  width: 1000px;
+  height: 350px;
+
+  border-radius: 10px;
+
+  user-select: none;
+`;
+export const Title = styled.p`
+  font-size: 20px;
+  font-weight: 600;
+
+  margin: 40px 0px 20px 0px;
+`;
+
+export const CompanyInfoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const CompanyInfoBox = styled.div`
+  width: 700px;
+`;
+
+export const PdfDataBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 300px;
+  height: 200px;
+
+  background-color: #ececed;
+  border-radius: 10px;
 `;
 
-export const Wrap = styled.div`
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-`;
-
-export const TopWrap = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const CompanyName = styled.h3`
+export const CompanyName = styled.div`
   font-size: 33px;
-  color: ${({ theme }) => theme.contrast};
-  font-weight: bold;
+  font-weight: 700;
+
+  margin-bottom: 30px;
 `;
 
-export const RecruitImage = styled.img`
-  width: 100%;
+export const Line = styled.div`
+  border-bottom: 1px solid #dddddd;
+
+  width: 85%;
 `;
 
-export const EtcContent = styled.pre`
-  font-size: 22px;
-  background-color: ${({ theme }) => theme.backgroundColor4};
-  border: 1px solid ${({ theme }) => theme.borderColor};
-  padding: 25px;
-  color: ${({ theme }) => theme.contrast};
-  white-space: pre-wrap;
+export const CompanyInfo = styled.div`
+  margin: 30px 0px 30px 0px;
+`;
+
+export const RecruitmentInfo = styled.div`
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 10px;
+`;
+
+export const SubTitle = styled.p`
+  font-size: 17px;
+  font-weight: 600;
+`;
+
+export const Info = styled.div`
+  font-size: 17px;
+  font-weight: 500;
+
+  color: rgba(46, 47, 51, 0.88);
+`;
+
+export const EtcBox = styled.div`
+  width: 85%;
+
+  font-size: 16px;
+  font-weight: 400;
+`;
+
+export const PdfBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+
+  cursor: pointer;
+`;
+
+export const Pdf = styled.a`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+
+  background-color: white;
+  height: 50px;
+
+  width: 250px;
+
+  border-radius: 20px;
+
+  margin-bottom: 10px;
+
+  text-decoration-line: none;
+  color: black;
+`;
+
+export const PdfTitle = styled.p`
+  margin-top: 12px;
+`;
+
+export const MenuBox = styled.div`
+  margin-right: 230px;
+  margin-bottom: 5px;
+
+  display: flex;
+  justify-content: flex-end;
 `;

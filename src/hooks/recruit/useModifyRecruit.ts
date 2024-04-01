@@ -8,7 +8,8 @@ import {
   useGetRecruitQuery,
   usePatchRecruitMutation,
 } from "../../queries/recruit/recruit.query";
-import { recruitImageAtom } from "../../store/recruitWrite/recuritWriteAtom";
+import { recruitPdfAtom } from "../../store/recruitWrite/recuritWriteAtom";
+import { PostRecruitParam } from "../../repositories/RecruitRepository/RecruitRepository";
 
 interface Props {
   recruitId: number | undefined;
@@ -22,18 +23,26 @@ const useModifyRecruit = ({ recruitId }: Props) => {
   const patchRecruitMutation = usePatchRecruitMutation();
 
   const [prevModifyRecruitData, setPrevModifyRecruitData] = useState({
-    image: "",
-    companyName: "",
+    name: "",
+    location: "",
+    duty: "",
     etc: "",
+    personnel: 0,
+    image: "",
+    pdfs: [],
   });
 
-  const [modifyRecruitData, setModifyRecruitData] = useState({
-    image: "",
-    companyName: "",
+  const [modifyRecruitData, setModifyRecruitData] = useState<PostRecruitParam>({
+    name: "",
+    location: "",
+    duty: "",
     etc: "",
+    personnel: 0,
+    image: "",
+    pdfs: [],
   });
 
-  const [recruitImage, setRecruitImage] = useRecoilState(recruitImageAtom);
+  const [recruitImage, setRecruitImage] = useRecoilState(recruitPdfAtom);
 
   const { data: serverRecruitData } = useGetRecruitQuery({
     id: Number(recruitId),
@@ -41,19 +50,27 @@ const useModifyRecruit = ({ recruitId }: Props) => {
 
   useEffect(() => {
     if (recruitId && serverRecruitData) {
-      const { image, etc, companyName } = serverRecruitData.data;
-
+      const { image, etc, name, duty, location, personnel, pdfs } =
+        serverRecruitData.data;
       setPrevModifyRecruitData({
         image,
         etc,
-        companyName,
+        name,
+        duty,
+        location,
+        personnel,
+        pdfs: [],
       });
       setModifyRecruitData({
         image,
         etc,
-        companyName,
+        name,
+        duty,
+        location,
+        personnel,
+        pdfs: [],
       });
-      setRecruitImage(serverRecruitData.data.image);
+      setRecruitImage(serverRecruitData.data.pdfs);
     }
   }, [serverRecruitData, setRecruitImage, recruitId]);
 
@@ -74,19 +91,18 @@ const useModifyRecruit = ({ recruitId }: Props) => {
       return;
     }
 
-    if (recruitImage === "") {
-      B1ndToast.showInfo("이미지를 추가해주세요.");
-      return;
-    }
+    // if (recruitImage === "") {
+    //   B1ndToast.showInfo("이미지를 추가해주세요.");
+    //   return;
+    // }
 
-    if (modifyRecruitData.companyName === "") {
-      B1ndToast.showInfo("회사명을 추가해주세요.");
-      return;
-    }
+    // if (modifyRecruitData.companyName === "") {
+    //   B1ndToast.showInfo("회사명을 추가해주세요.");
+    //   return;
+    // }
 
     patchRecruitMutation.mutate(
       {
-        id: recruitId!,
         ...modifyRecruitData,
       },
       {
@@ -95,7 +111,7 @@ const useModifyRecruit = ({ recruitId }: Props) => {
           queryClient.invalidateQueries(
             QUERY_KEYS.recruit.getRecruit(recruitId!)
           );
-          queryClient.invalidateQueries(QUERY_KEYS.recruit.getRecruits);
+          //   queryClient.invalidateQueries(QUERY_KEYS.recruit.getRecruits);
           navigate(`/recruit/${recruitId}`);
         },
         onError: () => {
@@ -109,6 +125,7 @@ const useModifyRecruit = ({ recruitId }: Props) => {
     modifyRecruitData,
     onChangeModifyContent,
     onSubmitModifyContent,
+    setModifyRecruitData,
   };
 };
 
