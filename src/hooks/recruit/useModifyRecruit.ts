@@ -49,6 +49,8 @@ const useModifyRecruit = ({ recruitId }: Props) => {
     id: Number(recruitId),
   });
 
+  console.log(serverRecruitData);
+
   useEffect(() => {
     if (recruitId && serverRecruitData) {
       const { image, etc, name, duty, location, personnel, pdfs } =
