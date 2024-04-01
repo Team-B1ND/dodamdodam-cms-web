@@ -117,6 +117,7 @@ const RecruitUploadForm = () => {
               <S.JobListBox>
                 {JobList.map((job) => {
                   const isSelected = selectJob.includes(job);
+
                   return (
                     <S.JobList
                       onClick={() =>
