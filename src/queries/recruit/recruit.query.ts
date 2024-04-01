@@ -47,10 +47,10 @@ export const usePostRecruitMutation = () => {
   return mutation;
 };
 
-// export const usePatchRecruitMutation = () => {
-//   const mutation = useMutation(RecruitRepositoryImpl.patchRecruit);
-//   return mutation;
-// };
+export const usePatchRecruitMutation = () => {
+  const mutation = useMutation(RecruitRepositoryImpl.patchRecruit);
+  return mutation;
+};
 
 export const useDeleteRecruitMutation = () => {
   const mutation = useMutation(RecruitRepositoryImpl.deleteRecruit);

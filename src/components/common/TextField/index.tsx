@@ -5,7 +5,7 @@ interface TextFieldProps {
   name: string;
   children: React.ReactNode;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  value?: string;
+  value?: string | number;
   functions?: (() => void) | string;
   type?: string;
 }

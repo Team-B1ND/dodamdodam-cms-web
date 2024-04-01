@@ -8,7 +8,7 @@ export interface RecruitRepository {
 
   postRecruit(params: PostRecruitParam): Promise<void>;
 
-  // patchRecruit(params: PatchRecruitParam): Promise<void>;
+  patchRecruit(params: PostRecruitParam): Promise<void>;
 
   deleteRecruit({ id }: DeleteRecruitParam): Promise<void>;
 }

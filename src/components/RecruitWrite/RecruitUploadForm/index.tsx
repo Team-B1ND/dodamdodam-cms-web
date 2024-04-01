@@ -1,7 +1,7 @@
 import * as S from "./style";
 import useWriteRecruit from "../../../hooks/recruit/useWriteRecruit";
 import TextField from "../../common/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { GiCancel } from "react-icons/gi";
 import { JobList } from "../../../constants/job/job.constant";
@@ -13,9 +13,11 @@ import {
 } from "../../../store/recruitWrite/recuritWriteAtom";
 import { LuUpload } from "react-icons/lu";
 import { TiDelete } from "react-icons/ti";
+import { Params, useParams } from "react-router-dom";
+import useModifyRecruit from "../../../hooks/recruit/useModifyRecruit";
 
 const RecruitUploadForm = () => {
-  // const { id }: Readonly<Params<"id">> = useParams();
+  const { id }: Readonly<Params<"id">> = useParams();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const {
@@ -32,6 +34,14 @@ const RecruitUploadForm = () => {
     useUploadRecruitImage();
   const [pdfImgUrl, setPdfImgUrl] = useRecoilState(imgUrlAtom);
   const [recruitPdfdata, setRecruitPdfData] = useRecoilState(recruitPdfAtom);
+  const {
+    onSubmitModifyContent,
+    onChangeModifyContent,
+    modifyRecruitData,
+    setModifyRecruitData,
+  } = useModifyRecruit({
+    recruitId: Number(id),
+  });
 
   return (
     <S.Container>
@@ -76,8 +86,8 @@ const RecruitUploadForm = () => {
         <TextField
           id="name"
           name="name"
-          value={textContent.name}
-          onChange={onChangeContent}
+          value={id ? modifyRecruitData.name : textContent.name}
+          onChange={id ? onChangeModifyContent : onChangeContent}
         >
           회사명
         </TextField>
@@ -85,8 +95,8 @@ const RecruitUploadForm = () => {
         <TextField
           id="location"
           name="location"
-          value={textContent.location}
-          onChange={onChangeContent}
+          value={id ? modifyRecruitData.location : textContent.location}
+          onChange={id ? onChangeModifyContent : onChangeContent}
         >
           회사 위치
         </TextField>
@@ -97,6 +107,7 @@ const RecruitUploadForm = () => {
               <S.JobListBox>
                 {JobList.map((job) => {
                   const isSelected = selectJob.includes(job);
+
                   return (
                     <S.JobList
                       onClick={() =>
@@ -124,7 +135,7 @@ const RecruitUploadForm = () => {
             </S.JobBox>
           ) : (
             <S.JobTitle onClick={() => setIsOpen(!isOpen)}>
-              {selectJobList ? (
+              {(selectJobList && !id) || (!selectJobList && id) ? (
                 <div
                   style={{
                     display: "flex",
@@ -133,7 +144,9 @@ const RecruitUploadForm = () => {
                   }}
                 >
                   <S.SmailTitle>직무</S.SmailTitle>
-                  <div style={{ color: "black" }}>{selectJobList}</div>
+                  <div style={{ color: "black" }}>
+                    {id ? modifyRecruitData.duty : selectJobList}
+                  </div>
                 </div>
               ) : (
                 <div
@@ -155,6 +168,7 @@ const RecruitUploadForm = () => {
           name="personnel"
           onChange={onChangeContent}
           type="number"
+          value={id ? modifyRecruitData.personnel : textContent.personnel}
         >
           모집 인원 (숫자만 입력)
         </TextField>
@@ -164,7 +178,7 @@ const RecruitUploadForm = () => {
             id="etc"
             name="etc"
             onChange={onChangeContent}
-            value={textContent.etc}
+            value={id ? modifyRecruitData.etc : textContent.etc}
           />
         </S.InputContainer>
 
@@ -204,7 +218,7 @@ const RecruitUploadForm = () => {
         )}
 
         <S.RecruitUpload
-          onClick={() => onSubmitRecurit()}
+          onClick={id ? onSubmitModifyContent : onSubmitRecurit}
           style={{ marginTop: recruitPdfdata.length > 0 ? "15px" : "30px" }}
         >
           공고 올리기

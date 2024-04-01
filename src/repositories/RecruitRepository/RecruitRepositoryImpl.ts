@@ -27,9 +27,9 @@ class RecruitRepositoryImpl implements RecruitRepository {
     await customAxios.post("/recruit", params);
   }
 
-  // public async patchRecruit(params: PatchRecruitParam): Promise<void> {
-  //   await customAxios.patch("/recruit", params);
-  // }
+  public async patchRecruit(params: PostRecruitParam): Promise<void> {
+    await customAxios.patch("/recruit", params);
+  }
 
   public async deleteRecruit({ id }: DeleteRecruitParam): Promise<void> {
     await customAxios.delete(`/recruit/${id}`);

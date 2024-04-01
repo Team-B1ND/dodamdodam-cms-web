@@ -25,7 +25,7 @@ export const Wrap = styled.button<{ fontSize: number }>`
   padding: 0px;
   background-color: ${({ theme }) => theme.backgroundColor4};
   cursor: pointer;
-  border: 1px solid ${({ theme }) => theme.borderColor};
+  border: 1px solid #a1a1a1;
 
   &:hover {
     filter: brightness(80%);

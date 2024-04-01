@@ -120,3 +120,11 @@ export const Pdf = styled.a`
 export const PdfTitle = styled.p`
   margin-top: 12px;
 `;
+
+export const MenuBox = styled.div`
+  margin-right: 230px;
+  margin-bottom: 5px;
+
+  display: flex;
+  justify-content: flex-end;
+`;
