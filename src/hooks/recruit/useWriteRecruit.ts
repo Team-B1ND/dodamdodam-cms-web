@@ -9,12 +9,13 @@ import {
   imgUrlAtom,
   recruitPdfAtom,
 } from "../../store/recruitWrite/recuritWriteAtom";
+import { QUERY_KEYS } from "../../queries/queryKey";
 
 const useWriteRecruit = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [recruitPdfData, setRecruitPdfData] = useRecoilState(recruitPdfAtom);
-  const [pdfImgUrl, setPdfImgUrl] = useRecoilState(imgUrlAtom);
+  const [recruitPdfData] = useRecoilState(recruitPdfAtom);
+  const [pdfImgUrl] = useRecoilState(imgUrlAtom);
 
   const [textContent, setTextContent] = useState<PostRecruitParam>({
     name: "",
@@ -87,6 +88,7 @@ const useWriteRecruit = () => {
           });
           navigate("/recruit");
           B1ndToast.showSuccess("공고 등록 완료!");
+          queryClient.invalidateQueries(QUERY_KEYS.recruit.getRecruits(1));
         },
         onError: () => {
           B1ndToast.showError("에러가 발생하였습니다");

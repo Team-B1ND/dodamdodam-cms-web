@@ -1,7 +1,7 @@
 import * as S from "./style";
 import useWriteRecruit from "../../../hooks/recruit/useWriteRecruit";
 import TextField from "../../common/TextField";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { GiCancel } from "react-icons/gi";
 import { JobList } from "../../../constants/job/job.constant";
@@ -46,22 +46,7 @@ const RecruitUploadForm = () => {
         <S.Title isBottom={16}>채용 공고 미리보기</S.Title>
 
         <S.PreviewBox>
-          {pdfImgUrl !== "" ? (
-            <div>
-              <div
-                onClick={() => setPdfImgUrl("")}
-                style={{
-                  position: "absolute",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  width: "32%",
-                }}
-              >
-                <TiDelete color="red" size={50} />
-              </div>
-              <S.Img alt="preview" src={pdfImgUrl} />
-            </div>
-          ) : (
+          {pdfImgUrl === "" ? (
             <label htmlFor="thumbnail">
               <input
                 type="file"
@@ -76,6 +61,21 @@ const RecruitUploadForm = () => {
                 <p>이미지를 업로드해주세요</p>
               </S.UploadIconBox>
             </label>
+          ) : (
+            <div>
+              <div
+                onClick={() => setPdfImgUrl("")}
+                style={{
+                  position: "absolute",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  width: "32%",
+                }}
+              >
+                <TiDelete color="red" size={50} />
+              </div>
+              <S.Img alt="preview" src={pdfImgUrl} />
+            </div>
           )}
         </S.PreviewBox>
       </div>
@@ -163,7 +163,7 @@ const RecruitUploadForm = () => {
         <TextField
           id="personnel"
           name="personnel"
-          onChange={onChangeContent}
+          onChange={id ? onChangeModifyContent : onChangeContent}
           type="number"
           value={id ? modifyRecruitData.personnel : textContent.personnel}
         >
@@ -174,7 +174,7 @@ const RecruitUploadForm = () => {
           <S.Input
             id="etc"
             name="etc"
-            onChange={onChangeContent}
+            onChange={id ? onChangeModifyContent : onChangeContent}
             value={id ? modifyRecruitData.etc : textContent.etc}
           />
         </S.InputContainer>
