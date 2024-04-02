@@ -84,6 +84,7 @@ const useUploadRecruitImage = () => {
     },
     [postUploadMutation, setImgUrl]
   );
+
   const handleDeletePdf = (id: number) => {
     const newPdfUrlList = recruitPdfdata.filter((_, index) => index !== id);
     setRecruitPdfData(newPdfUrlList);

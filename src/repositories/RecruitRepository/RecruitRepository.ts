@@ -3,13 +3,13 @@ import { Response } from "../../types/util/response.type";
 export interface RecruitRepository {
   getRecruitList(page: number): Promise<GetRecruitListResponese>;
 
-  getRecruit({ id }: GetRecruitParam): Promise<GetRecruitResponese>;
+  getRecruit({ id }: RecruitIdParam): Promise<GetRecruitResponese>;
 
   postRecruit(params: PostRecruitParam): Promise<void>;
 
   patchRecruit(params: PostRecruitParam, id: number): Promise<void>;
 
-  deleteRecruit({ id }: DeleteRecruitParam): Promise<void>;
+  deleteRecruit({ id }: RecruitIdParam): Promise<void>;
 }
 
 export interface GetRecruitListResponese extends Response {
@@ -43,7 +43,7 @@ export interface GetRecruitResponese extends Response {
   };
 }
 
-export interface GetRecruitParam {
+export interface RecruitIdParam {
   id: number;
 }
 
@@ -60,8 +60,4 @@ export interface PostRecruitParam {
 export interface RecruitPdfParam {
   url: string;
   name: string;
-}
-
-export interface DeleteRecruitParam {
-  id: number;
 }

@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
 import {
-  GetRecruitParam,
+  RecruitIdParam,
   GetRecruitResponese,
   GetRecruitListResponese,
   PostRecruitParam,
@@ -25,7 +25,7 @@ export const useGetRecruitsQuery = (
   );
 
 export const useGetRecruitQuery = (
-  { id }: GetRecruitParam,
+  { id }: RecruitIdParam,
   options?: UseQueryOptions<
     GetRecruitResponese,
     AxiosError,
