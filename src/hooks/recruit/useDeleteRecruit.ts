@@ -21,7 +21,7 @@ const useDeleteRecruit = () => {
       {
         onSuccess: () => {
           B1ndToast.showSuccess("삭제되었습니다.");
-          queryClient.invalidateQueries([QUERY_KEYS.recruit.getRecruits]);
+          queryClient.invalidateQueries([QUERY_KEYS.recruit.getRecruitList]);
           navigate("/recruit");
         },
         onError: () => {

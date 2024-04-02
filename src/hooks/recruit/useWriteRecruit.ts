@@ -15,14 +15,14 @@ const useWriteRecruit = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [recruitPdfData] = useRecoilState(recruitPdfAtom);
-  const [pdfImgUrl] = useRecoilState(imgUrlAtom);
+  const [imgUrl, setImgUrl] = useRecoilState(imgUrlAtom);
 
   const [textContent, setTextContent] = useState<PostRecruitParam>({
     name: "",
     location: "",
     duty: "",
     etc: "",
-    personnel: 0,
+    personnel: "",
     image: "",
     pdfs: [],
   });
@@ -71,8 +71,8 @@ const useWriteRecruit = () => {
         location: location,
         duty: selectJobList,
         etc: etc,
-        personnel: personnel,
-        image: pdfImgUrl,
+        personnel: Number(personnel),
+        image: imgUrl,
         pdfs: recruitPdfData,
       },
       {
@@ -82,13 +82,15 @@ const useWriteRecruit = () => {
             location: "",
             duty: "",
             etc: "",
-            personnel: 0,
+            personnel: "",
             image: "",
             pdfs: [],
           });
+
+          setImgUrl("");
           navigate("/recruit");
           B1ndToast.showSuccess("공고 등록 완료!");
-          queryClient.invalidateQueries(QUERY_KEYS.recruit.getRecruits(1));
+          queryClient.invalidateQueries(QUERY_KEYS.recruit.getRecruitList(1));
         },
         onError: () => {
           B1ndToast.showError("에러가 발생하였습니다");

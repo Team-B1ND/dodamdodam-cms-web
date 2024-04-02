@@ -20,6 +20,9 @@ const RecruitUploadForm = () => {
   const { id }: Readonly<Params<"id">> = useParams();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [imgUrl, setImgUrl] = useRecoilState(imgUrlAtom);
+  const [recruitPdfdata, setRecruitPdfData] = useRecoilState(recruitPdfAtom);
+
   const {
     onChangeContent,
     textContent,
@@ -30,15 +33,12 @@ const RecruitUploadForm = () => {
     onSubmitRecurit,
   } = useWriteRecruit();
 
-  const { onChangePdf, UploadThumbnail, handleDeletePdf } =
-    useUploadRecruitImage();
-  const [pdfImgUrl, setPdfImgUrl] = useRecoilState(imgUrlAtom);
-  const [recruitPdfdata, setRecruitPdfData] = useRecoilState(recruitPdfAtom);
-
   const { onSubmitModifyContent, onChangeModifyContent, modifyRecruitData } =
     useModifyRecruit({
       recruitId: Number(id),
     });
+  const { onChangePdf, UploadThumbnail, handleDeletePdf } =
+    useUploadRecruitImage();
 
   return (
     <S.Container>
@@ -46,7 +46,7 @@ const RecruitUploadForm = () => {
         <S.Title isBottom={16}>채용 공고 미리보기</S.Title>
 
         <S.PreviewBox>
-          {pdfImgUrl === "" ? (
+          {imgUrl === "" ? (
             <label htmlFor="thumbnail">
               <input
                 type="file"
@@ -64,7 +64,9 @@ const RecruitUploadForm = () => {
           ) : (
             <div>
               <div
-                onClick={() => setPdfImgUrl("")}
+                onClick={() => {
+                  setImgUrl("");
+                }}
                 style={{
                   position: "absolute",
                   display: "flex",
@@ -74,7 +76,10 @@ const RecruitUploadForm = () => {
               >
                 <TiDelete color="red" size={50} />
               </div>
-              <S.Img alt="preview" src={pdfImgUrl} />
+              <S.Img
+                alt="preview"
+                src={id ? modifyRecruitData.image : imgUrl}
+              />
             </div>
           )}
         </S.PreviewBox>
