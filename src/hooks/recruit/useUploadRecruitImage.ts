@@ -41,6 +41,10 @@ const useUploadRecruitImage = () => {
                   pdfs: [...prev.pdfs, { name: file.name, url: data.data }],
                 }));
               } else {
+                setRecruitPdfData((prev) => [
+                  ...prev,
+                  { name: file.name, url: data.data },
+                ]);
               }
             },
             onError: () => {
