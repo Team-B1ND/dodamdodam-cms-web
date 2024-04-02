@@ -68,13 +68,21 @@ const RecruitUploadForm = () => {
                   setImgUrl("");
                 }}
                 style={{
-                  position: "absolute",
                   display: "flex",
-                  justifyContent: "flex-end",
-                  width: "32%",
+                  justifyContent: "center",
+                  position: "absolute",
+                  width: "1100px",
                 }}
               >
-                <TiDelete color="red" size={50} />
+                <TiDelete
+                  color="red"
+                  size={50}
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    width: "100%",
+                  }}
+                />
               </div>
               <S.Img
                 alt="preview"
