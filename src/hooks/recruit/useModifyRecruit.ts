@@ -54,6 +54,8 @@ const useModifyRecruit = ({ recruitId }: Props) => {
       const { image, etc, name, duty, location, personnel, pdfs } =
         serverRecruitData.data;
 
+      console.log(duty);
+
       setImgUrl(serverRecruitData.data.image);
       setRecruitPdf(serverRecruitData.data.pdfs);
       setPrevModifyRecruitData({

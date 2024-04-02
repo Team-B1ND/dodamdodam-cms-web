@@ -1,11 +1,12 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { ChangeEvent, useState } from "react";
 import { useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { Params, useNavigate, useParams } from "react-router-dom";
 import { usePostRecruitMutation } from "../../queries/recruit/recruit.query";
 import { PostRecruitParam } from "../../repositories/RecruitRepository/RecruitRepository";
 import { useRecoilState } from "recoil";
 import {
+  ModifyRecrutAtom,
   imgUrlAtom,
   recruitPdfAtom,
 } from "../../store/recruitWrite/recuritWriteAtom";
@@ -16,6 +17,9 @@ const useWriteRecruit = () => {
   const navigate = useNavigate();
   const [recruitPdfData] = useRecoilState(recruitPdfAtom);
   const [imgUrl, setImgUrl] = useRecoilState(imgUrlAtom);
+
+  const [, setModifyRecruitData] =
+    useRecoilState<PostRecruitParam>(ModifyRecrutAtom);
 
   const [textContent, setTextContent] = useState<PostRecruitParam>({
     name: "",

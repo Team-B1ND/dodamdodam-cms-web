@@ -6,7 +6,6 @@ import {
   imgUrlAtom,
   recruitPdfAtom,
 } from "../../store/recruitWrite/recuritWriteAtom";
-import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { Params, useParams } from "react-router-dom";
 import { PostRecruitParam } from "../../repositories/RecruitRepository/RecruitRepository";
 
@@ -16,7 +15,7 @@ const useUploadRecruitImage = () => {
   const [, setImgUrl] = useRecoilState(imgUrlAtom);
   const { id }: Readonly<Params<"id">> = useParams();
 
-  const [, setModifyRecruitData] =
+  const [modifyRecruitData, setModifyRecruitData] =
     useRecoilState<PostRecruitParam>(ModifyRecrutAtom);
 
   const onChangePdf = useCallback(
@@ -27,19 +26,31 @@ const useUploadRecruitImage = () => {
         const formData = new FormData();
         formData.append("file", file);
 
-        try {
-          const { data } = await postUploadMutation.mutateAsync({ formData });
+        postUploadMutation.mutate(
+          { formData },
+          {
+            onSuccess: (data) => {
+              if (id) {
+                setRecruitPdfData((prev) => [
+                  ...prev,
+                  { name: file.name, url: data.data },
+                ]);
 
-          setRecruitPdfData((prevPdfData) => [
-            ...prevPdfData,
-            { name: file.name, url: data },
-          ]);
-        } catch (error) {
-          B1ndToast.showError("파일 업로드에 실패했습니다.");
-        }
+                setModifyRecruitData((prev) => ({
+                  ...prev,
+                  pdfs: [...prev.pdfs, { name: file.name, url: data.data }],
+                }));
+              } else {
+              }
+            },
+            onError: () => {
+              setImgUrl("");
+            },
+          }
+        );
       }
     },
-    [postUploadMutation, setRecruitPdfData]
+    [postUploadMutation, setRecruitPdfData, setModifyRecruitData]
   );
 
   const UploadThumbnail = useCallback(
@@ -76,6 +87,11 @@ const useUploadRecruitImage = () => {
   const handleDeletePdf = (id: number) => {
     const newPdfUrlList = recruitPdfdata.filter((_, index) => index !== id);
     setRecruitPdfData(newPdfUrlList);
+    const PdfList = modifyRecruitData.pdfs.filter((_, index) => index !== id);
+    setModifyRecruitData((prev) => ({
+      ...prev,
+      pdfs: PdfList,
+    }));
   };
 
   return {
