@@ -1,27 +1,32 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { ChangeEvent, useState } from "react";
 import { useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { Params, useNavigate, useParams } from "react-router-dom";
 import { usePostRecruitMutation } from "../../queries/recruit/recruit.query";
 import { PostRecruitParam } from "../../repositories/RecruitRepository/RecruitRepository";
 import { useRecoilState } from "recoil";
 import {
+  ModifyRecrutAtom,
   imgUrlAtom,
   recruitPdfAtom,
 } from "../../store/recruitWrite/recuritWriteAtom";
+import { QUERY_KEYS } from "../../queries/queryKey";
 
 const useWriteRecruit = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [recruitPdfData, setRecruitPdfData] = useRecoilState(recruitPdfAtom);
-  const [pdfImgUrl, setPdfImgUrl] = useRecoilState(imgUrlAtom);
+  const [recruitPdfData] = useRecoilState(recruitPdfAtom);
+  const [imgUrl, setImgUrl] = useRecoilState(imgUrlAtom);
+
+  const [, setModifyRecruitData] =
+    useRecoilState<PostRecruitParam>(ModifyRecrutAtom);
 
   const [textContent, setTextContent] = useState<PostRecruitParam>({
     name: "",
     location: "",
     duty: "",
     etc: "",
-    personnel: 0,
+    personnel: "",
     image: "",
     pdfs: [],
   });
@@ -70,8 +75,8 @@ const useWriteRecruit = () => {
         location: location,
         duty: selectJobList,
         etc: etc,
-        personnel: personnel,
-        image: pdfImgUrl,
+        personnel: Number(personnel),
+        image: imgUrl,
         pdfs: recruitPdfData,
       },
       {
@@ -81,12 +86,15 @@ const useWriteRecruit = () => {
             location: "",
             duty: "",
             etc: "",
-            personnel: 0,
+            personnel: "",
             image: "",
             pdfs: [],
           });
+
+          setImgUrl("");
           navigate("/recruit");
           B1ndToast.showSuccess("공고 등록 완료!");
+          queryClient.invalidateQueries(QUERY_KEYS.recruit.getRecruitList(1));
         },
         onError: () => {
           B1ndToast.showError("에러가 발생하였습니다");

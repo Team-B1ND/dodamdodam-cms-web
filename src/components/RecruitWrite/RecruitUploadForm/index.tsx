@@ -1,7 +1,7 @@
 import * as S from "./style";
 import useWriteRecruit from "../../../hooks/recruit/useWriteRecruit";
 import TextField from "../../common/TextField";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { GiCancel } from "react-icons/gi";
 import { JobList } from "../../../constants/job/job.constant";
@@ -20,6 +20,9 @@ const RecruitUploadForm = () => {
   const { id }: Readonly<Params<"id">> = useParams();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [imgUrl, setImgUrl] = useRecoilState(imgUrlAtom);
+  const [recruitPdfdata, setRecruitPdfData] = useRecoilState(recruitPdfAtom);
+
   const {
     onChangeContent,
     textContent,
@@ -30,18 +33,12 @@ const RecruitUploadForm = () => {
     onSubmitRecurit,
   } = useWriteRecruit();
 
+  const { onSubmitModifyContent, onChangeModifyContent, modifyRecruitData } =
+    useModifyRecruit({
+      recruitId: Number(id),
+    });
   const { onChangePdf, UploadThumbnail, handleDeletePdf } =
     useUploadRecruitImage();
-  const [pdfImgUrl, setPdfImgUrl] = useRecoilState(imgUrlAtom);
-  const [recruitPdfdata, setRecruitPdfData] = useRecoilState(recruitPdfAtom);
-  const {
-    onSubmitModifyContent,
-    onChangeModifyContent,
-    modifyRecruitData,
-    setModifyRecruitData,
-  } = useModifyRecruit({
-    recruitId: Number(id),
-  });
 
   return (
     <S.Container>
@@ -49,22 +46,7 @@ const RecruitUploadForm = () => {
         <S.Title isBottom={16}>채용 공고 미리보기</S.Title>
 
         <S.PreviewBox>
-          {pdfImgUrl !== "" ? (
-            <div>
-              <div
-                onClick={() => setPdfImgUrl("")}
-                style={{
-                  position: "absolute",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  width: "32%",
-                }}
-              >
-                <TiDelete color="red" size={50} />
-              </div>
-              <S.Img alt="preview" src={pdfImgUrl} />
-            </div>
-          ) : (
+          {imgUrl === "" ? (
             <label htmlFor="thumbnail">
               <input
                 type="file"
@@ -79,6 +61,34 @@ const RecruitUploadForm = () => {
                 <p>이미지를 업로드해주세요</p>
               </S.UploadIconBox>
             </label>
+          ) : (
+            <div>
+              <div
+                onClick={() => {
+                  setImgUrl("");
+                }}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  position: "absolute",
+                  width: "1100px",
+                }}
+              >
+                <TiDelete
+                  color="red"
+                  size={50}
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    width: "100%",
+                  }}
+                />
+              </div>
+              <S.Img
+                alt="preview"
+                src={id ? modifyRecruitData.image : imgUrl}
+              />
+            </div>
           )}
         </S.PreviewBox>
       </div>
@@ -107,7 +117,7 @@ const RecruitUploadForm = () => {
               <S.JobListBox>
                 {JobList.map((job) => {
                   const isSelected = selectJob.includes(job);
-
+                  // console.log(isSelected);
                   return (
                     <S.JobList
                       onClick={() =>
@@ -166,7 +176,7 @@ const RecruitUploadForm = () => {
         <TextField
           id="personnel"
           name="personnel"
-          onChange={onChangeContent}
+          onChange={id ? onChangeModifyContent : onChangeContent}
           type="number"
           value={id ? modifyRecruitData.personnel : textContent.personnel}
         >
@@ -177,7 +187,7 @@ const RecruitUploadForm = () => {
           <S.Input
             id="etc"
             name="etc"
-            onChange={onChangeContent}
+            onChange={id ? onChangeModifyContent : onChangeContent}
             value={id ? modifyRecruitData.etc : textContent.etc}
           />
         </S.InputContainer>

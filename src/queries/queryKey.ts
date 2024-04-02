@@ -3,7 +3,7 @@ export const QUERY_KEYS = Object.freeze({
     getMyMember: "member/getMyMember",
   },
   recruit: {
-    getRecruits: (page: number) => ["recruit", page],
-    getRecruit: (id: number) => ["recruit/getRecruit", id],
+    getRecruitList: (page: number) => ["recruit", page],
+    getRecruit: (id: number) => ["/recruit", id],
   },
 });

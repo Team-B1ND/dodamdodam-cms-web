@@ -122,9 +122,15 @@ export const PdfTitle = styled.p`
 `;
 
 export const MenuBox = styled.div`
-  margin-right: 230px;
-  margin-bottom: 5px;
+  // margin-right: 230px;
+  display: flex;
+  justify-content: center;
 
+  margin-bottom: 5px;
+`;
+
+export const Menu = styled.div`
+  width: 1000px;
   display: flex;
   justify-content: flex-end;
 `;

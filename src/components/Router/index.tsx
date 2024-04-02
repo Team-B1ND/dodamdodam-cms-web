@@ -1,24 +1,13 @@
-import { useEffect } from "react";
-import { Routes as Switch, Route, useNavigate } from "react-router-dom";
-import { useResetRecoilState } from "recoil";
+import { Routes as Switch, Route } from "react-router-dom";
 import RecruitDetailPage from "../../pages/RecruitDetailPage";
 import RecruitPage from "../../pages/RecruitPage";
 import RecruitWritePage from "../../pages/RecruitWritePage";
-
-import { recruitPdfAtom } from "../../store/recruitWrite/recuritWriteAtom";
 import withAuth from "../HOC/withAuth";
 
 const Router = () => {
   const AuthRecruitPage = withAuth(RecruitPage);
   const AuthRecruitWritePage = withAuth(RecruitWritePage);
   const AuthRecruitDetailPage = withAuth(RecruitDetailPage);
-
-  const navigate = useNavigate();
-  const resetRecruitImage = useResetRecoilState(recruitPdfAtom);
-
-  useEffect(() => {
-    resetRecruitImage();
-  }, [navigate]);
 
   return (
     <Switch>

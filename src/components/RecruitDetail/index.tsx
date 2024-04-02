@@ -7,6 +7,7 @@ import { CgTrashEmpty } from "@react-icons/all-files/cg/CgTrashEmpty";
 import useDeleteRecruit from "../../hooks/recruit/useDeleteRecruit";
 import { IoPerson } from "react-icons/io5";
 import { RiComputerFill } from "react-icons/ri";
+import { HiOutlinePencil } from "react-icons/hi";
 
 const RecruitDetail = () => {
   return (
@@ -28,29 +29,31 @@ const RecruitDetailContent = () => {
     <S.CompanyContainer>
       <div>
         <S.MenuBox>
-          <MenuDropdown
-            customStyle={{ width: 30, height: 30 }}
-            isOpen={isOpen}
-            onClose={() => setIsOpen(false)}
-            onToggle={() => setIsOpen((prev) => !prev)}
-          >
-            <MenuDropdown.Buttons>
-              {/* <MenuDropdown.Button
-                buttonType="NORMAL"
-                onClick={() => navigate(`/recruitwrite/${id}`)}
-              >
-                <MenuDropdown.Button.Icon icon={<HiOutlinePencil />} />
-                수정
-              </MenuDropdown.Button> */}
-              <MenuDropdown.Button
-                buttonType="DELETE"
-                onClick={() => onDelete(Number(id))}
-              >
-                <MenuDropdown.Button.Icon icon={<CgTrashEmpty />} />
-                삭제
-              </MenuDropdown.Button>
-            </MenuDropdown.Buttons>
-          </MenuDropdown>
+          <S.Menu>
+            <MenuDropdown
+              customStyle={{ width: 30, height: 30 }}
+              isOpen={isOpen}
+              onClose={() => setIsOpen(false)}
+              onToggle={() => setIsOpen((prev) => !prev)}
+            >
+              <MenuDropdown.Buttons>
+                <MenuDropdown.Button
+                  buttonType="NORMAL"
+                  onClick={() => navigate(`/recruitwrite/${id}`)}
+                >
+                  <MenuDropdown.Button.Icon icon={<HiOutlinePencil />} />
+                  수정
+                </MenuDropdown.Button>
+                <MenuDropdown.Button
+                  buttonType="DELETE"
+                  onClick={() => onDelete(Number(id))}
+                >
+                  <MenuDropdown.Button.Icon icon={<CgTrashEmpty />} />
+                  삭제
+                </MenuDropdown.Button>
+              </MenuDropdown.Buttons>
+            </MenuDropdown>
+          </S.Menu>
         </S.MenuBox>
         <S.ImageContainer>
           <S.CompanyImg src={data?.data.image} />
