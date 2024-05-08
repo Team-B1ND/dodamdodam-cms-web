@@ -21,7 +21,7 @@ const RecruitUploadForm = () => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [imgUrl, setImgUrl] = useRecoilState(imgUrlAtom);
-  const [recruitPdfdata, setRecruitPdfData] = useRecoilState(recruitPdfAtom);
+  const [recruitPdfdata] = useRecoilState(recruitPdfAtom);
 
   const {
     onChangeContent,
@@ -33,10 +33,16 @@ const RecruitUploadForm = () => {
     onSubmitRecurit,
   } = useWriteRecruit();
 
-  const { onSubmitModifyContent, onChangeModifyContent, modifyRecruitData } =
-    useModifyRecruit({
-      recruitId: Number(id),
-    });
+  const {
+    onSubmitModifyContent,
+    onChangeModifyContent,
+    modifyRecruitData,
+    selectModifJob,
+    modifyJobSelection,
+    modifyJobDeselection,
+  } = useModifyRecruit({
+    recruitId: Number(id),
+  });
   const { onChangePdf, UploadThumbnail, handleDeletePdf } =
     useUploadRecruitImage();
 
@@ -117,19 +123,33 @@ const RecruitUploadForm = () => {
               <S.JobListBox>
                 {JobList.map((job) => {
                   const isSelected = selectJob.includes(job);
-                  // console.log(isSelected);
+                  const isModifySeriesJob = selectModifJob.includes(job);
                   return (
                     <S.JobList
                       onClick={() =>
-                        isSelected
+                        id
+                          ? isModifySeriesJob
+                            ? modifyJobDeselection(job)
+                            : modifyJobSelection(job)
+                          : isSelected
                           ? handleJobDeselection(job)
                           : handleJobSelection(job)
                       }
                       style={{
-                        border: isSelected
+                        color: id
+                          ? isModifySeriesJob
+                            ? "#5d8bff"
+                            : "#969595"
+                          : isSelected
+                          ? "#5d8bff"
+                          : "#969595",
+                        border: id
+                          ? isModifySeriesJob
+                            ? "1.5px solid #5d8bff"
+                            : "1.5px solid #969595"
+                          : isSelected
                           ? "1.5px solid #5d8bff"
                           : "1.5px solid #969595",
-                        color: isSelected ? " #5d8bff" : "#969595",
                       }}
                     >
                       {job}

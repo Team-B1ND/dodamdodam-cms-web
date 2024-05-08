@@ -1,7 +1,7 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
-import { Params, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { QUERY_KEYS } from "../../queries/queryKey";
 import {
@@ -25,6 +25,7 @@ interface Props {
 const useModifyRecruit = ({ recruitId }: Props) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [selectModifJob, setSelectModifJob] = useState<string[]>([]);
 
   const patchRecruitMutation = usePatchRecruitMutation();
 
@@ -54,10 +55,11 @@ const useModifyRecruit = ({ recruitId }: Props) => {
       const { image, etc, name, duty, location, personnel, pdfs } =
         serverRecruitData.data;
 
-      console.log(duty);
-
       setImgUrl(serverRecruitData.data.image);
       setRecruitPdf(serverRecruitData.data.pdfs);
+      const dutyArray = duty.split(",");
+      setSelectModifJob(dutyArray);
+
       setPrevModifyRecruitData({
         image,
         etc,
@@ -80,6 +82,17 @@ const useModifyRecruit = ({ recruitId }: Props) => {
     }
   }, [serverRecruitData, setImgUrl, recruitId]);
 
+  const modifyJobSelection = (job: string) => {
+    if (!selectModifJob.includes(job)) {
+      setSelectModifJob((prev) => [...prev, job]);
+    }
+  };
+
+  const modifyJobDeselection = (job: string) => {
+    setSelectModifJob((prev) => prev.filter((selectJob) => selectJob !== job));
+  };
+
+  const selectJobList = selectModifJob.join(",");
   const onChangeModifyContent = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -104,9 +117,14 @@ const useModifyRecruit = ({ recruitId }: Props) => {
       return;
     }
 
+    const modifyDataList: PostRecruitParam = {
+      ...modifyRecruitData,
+      duty: selectJobList,
+    };
+
     patchRecruitMutation.mutate(
       {
-        PatchData: modifyRecruitData,
+        PatchData: modifyDataList,
         id: recruitId!,
       },
       {
@@ -117,6 +135,8 @@ const useModifyRecruit = ({ recruitId }: Props) => {
           );
           queryClient.invalidateQueries(QUERY_KEYS.recruit.getRecruitList(1));
           navigate(`/recruit/${recruitId}`);
+          setImgUrl("");
+          setRecruitPdf([]);
         },
         onError: () => {
           B1ndToast.showError("에러가 발생하였습니다");
@@ -130,6 +150,9 @@ const useModifyRecruit = ({ recruitId }: Props) => {
     onChangeModifyContent,
     onSubmitModifyContent,
     setModifyRecruitData,
+    selectModifJob,
+    modifyJobDeselection,
+    modifyJobSelection,
   };
 };
 
