@@ -133,7 +133,9 @@ const useModifyRecruit = ({ recruitId }: Props) => {
           queryClient.invalidateQueries(
             QUERY_KEYS.recruit.getRecruit(recruitId!)
           );
-          queryClient.invalidateQueries(QUERY_KEYS.recruit.getRecruitList(1));
+          queryClient.invalidateQueries(
+            QUERY_KEYS.recruit.getRecruitList(1, 10)
+          );
           navigate(`/recruit/${recruitId}`);
           setImgUrl("");
           setRecruitPdf([]);

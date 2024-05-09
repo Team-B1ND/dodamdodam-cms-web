@@ -11,6 +11,7 @@ import { QUERY_KEYS } from "../queryKey";
 
 export const useGetRecruitsQuery = (
   page: number,
+  size: number,
   options?: UseQueryOptions<
     GetRecruitListResponese,
     AxiosError,
@@ -19,8 +20,8 @@ export const useGetRecruitsQuery = (
   >
 ) =>
   useQuery(
-    QUERY_KEYS.recruit.getRecruitList(page),
-    () => RecruitRepositoryImpl.getRecruitList(page),
+    QUERY_KEYS.recruit.getRecruitList(page, size),
+    () => RecruitRepositoryImpl.getRecruitList(page, size),
     { ...options }
   );
 

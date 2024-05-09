@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { palette } from "../../../styles/paletts";
 
 export const Container = styled.div`
-  width: 430px;
-  height: 270px;
+  width: 348px;
+  height: 220px;
   background-color: ${({ theme }) => theme.backgroundColor4};
   box-shadow: ${palette.boxShadow};
   border-radius: 5px;
@@ -21,13 +21,16 @@ export const Container = styled.div`
 export const RecruitImage = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+
+  object-fit: contain;
 `;
 
 export const RecruitDescriptionContainer = styled.div`
   width: 100%;
-  height: 100px;
+  height: 90px;
+
   display: flex;
+
   padding: 20px;
   box-sizing: border-box;
   transition: all 0.3s ease;
@@ -35,18 +38,18 @@ export const RecruitDescriptionContainer = styled.div`
   left: 0px;
   bottom: 0px;
   background-color: black;
-  opacity: 50%;
+  opacity: 60%;
   justify-content: space-between;
 `;
 
 export const CompanyName = styled.h3`
-  font-size: 24px;
+  font-size: 20px;
   color: white;
   font-weight: bold;
 `;
 
 export const WriterName = styled.p`
   color: white;
-  font-size: 18px;
+  font-size: 16.5px;
   margin-top: auto;
 `;

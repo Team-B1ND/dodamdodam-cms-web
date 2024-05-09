@@ -8,8 +8,13 @@ import {
 } from "./RecruitRepository";
 
 class RecruitRepositoryImpl implements RecruitRepository {
-  public async getRecruitList(page: number): Promise<GetRecruitListResponese> {
-    const { data } = await customAxios.get(`/recruit?page=${page}`);
+  public async getRecruitList(
+    page: number,
+    size: number
+  ): Promise<GetRecruitListResponese> {
+    const { data } = await customAxios.get(
+      `/recruit?page=${page}&size=${size}`
+    );
     return data;
   }
 

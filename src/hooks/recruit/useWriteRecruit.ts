@@ -90,7 +90,9 @@ const useWriteRecruit = () => {
           setImgUrl("");
           navigate("/recruit");
           B1ndToast.showSuccess("공고 등록 완료!");
-          queryClient.invalidateQueries(QUERY_KEYS.recruit.getRecruitList(1));
+          queryClient.invalidateQueries(
+            QUERY_KEYS.recruit.getRecruitList(1, 10)
+          );
         },
         onError: () => {
           B1ndToast.showError("에러가 발생하였습니다");

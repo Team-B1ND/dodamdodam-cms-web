@@ -1,7 +1,7 @@
 import { Response } from "../../types/util/response.type";
 
 export interface RecruitRepository {
-  getRecruitList(page: number): Promise<GetRecruitListResponese>;
+  getRecruitList(page: number, size: number): Promise<GetRecruitListResponese>;
 
   getRecruit({ id }: RecruitIdParam): Promise<GetRecruitResponese>;
 

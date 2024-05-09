@@ -4,7 +4,9 @@ import RecruitItem from "../RecruitItem";
 import * as S from "./style";
 
 const RecruitList = () => {
-  const { data: getRecruitList } = useGetRecruitsQuery(1, { suspense: true });
+  const { data: getRecruitList } = useGetRecruitsQuery(1, 10, {
+    suspense: true,
+  });
 
   return (
     <>
@@ -16,6 +18,15 @@ const RecruitList = () => {
           <RecruitItem {...key}>{key}</RecruitItem>
         ))}
       </S.Container>
+      <S.PageContainer>
+        <S.PageButton
+          disabled={
+            getRecruitList && getRecruitList?.data.recruitList.length <= 10
+          }
+        >
+          더보기
+        </S.PageButton>
+      </S.PageContainer>
     </>
   );
 };
