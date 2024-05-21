@@ -92,7 +92,11 @@ const useModifyRecruit = ({ recruitId }: Props) => {
     setSelectModifJob((prev) => prev.filter((selectJob) => selectJob !== job));
   };
 
-  const selectJobList = selectModifJob.join(",");
+  // const selectJobList = selectModifJob.join(",");
+  const selectJobList = selectModifJob
+    .filter((job) => job.trim() !== "")
+    .join(",");
+
   const onChangeModifyContent = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -109,11 +113,6 @@ const useModifyRecruit = ({ recruitId }: Props) => {
 
     if (modifyRecruitData.location === "") {
       B1ndToast.showInfo("회사 위치를 입력해주세요.");
-      return;
-    }
-
-    if (modifyRecruitData.duty === "") {
-      B1ndToast.showInfo("직무를 선택해주세요.");
       return;
     }
 

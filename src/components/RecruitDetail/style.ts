@@ -16,6 +16,8 @@ export const CompanyImg = styled.img`
   border-radius: 10px;
 
   user-select: none;
+
+  object-fit: fill;
 `;
 export const Title = styled.p`
   font-size: 20px;
@@ -86,6 +88,8 @@ export const EtcBox = styled.div`
 
   font-size: 16px;
   font-weight: 400;
+
+  white-space: pre-line;
 `;
 
 export const PdfBox = styled.div`
