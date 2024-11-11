@@ -7,5 +7,5 @@ class MemberRepositoryImpl implements MemberRepository {
     return data;
   }
 }
-
-export default new MemberRepositoryImpl();
+const memberRepository = new MemberRepositoryImpl();
+export default memberRepository;

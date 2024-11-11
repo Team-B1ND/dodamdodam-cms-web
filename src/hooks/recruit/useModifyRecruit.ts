@@ -80,7 +80,7 @@ const useModifyRecruit = ({ recruitId }: Props) => {
         pdfs,
       });
     }
-  }, [serverRecruitData, setImgUrl, recruitId]);
+  }, [serverRecruitData, setImgUrl, recruitId, setRecruitPdf, setModifyRecruitData]);
 
   const modifyJobSelection = (job: string) => {
     if (!selectModifJob.includes(job)) {

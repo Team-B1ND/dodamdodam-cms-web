@@ -62,7 +62,7 @@ const useWriteRecruit = () => {
       return;
     }
 
-    if (selectJob == undefined) {
+    if (selectJob === undefined) {
       B1ndToast.showInfo("직무를 선택해주세요");
     }
     postRecruitMutation.mutate(

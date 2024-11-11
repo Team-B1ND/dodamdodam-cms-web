@@ -13,5 +13,5 @@ class TokenRepositoryImpl implements TokenRepository {
     return data;
   }
 }
-
-export default new TokenRepositoryImpl();
+const tokenRepository = new TokenRepositoryImpl();
+export default tokenRepository;

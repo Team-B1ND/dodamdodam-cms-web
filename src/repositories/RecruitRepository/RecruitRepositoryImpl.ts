@@ -40,5 +40,5 @@ class RecruitRepositoryImpl implements RecruitRepository {
     await customAxios.delete(`/recruit/${id}`);
   }
 }
-
-export default new RecruitRepositoryImpl();
+const recruitRepositoryImpl = new RecruitRepositoryImpl();
+export default recruitRepositoryImpl;

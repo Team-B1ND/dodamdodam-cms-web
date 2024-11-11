@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import DarkmodeButton from "../DarkmodeButton";
+// import DarkmodeButton from "../DarkmodeButton";
 import Header from "../Header";
 import Nav from "../Nav";
 import * as S from "./style";

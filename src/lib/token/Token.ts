@@ -34,5 +34,5 @@ class Token {
     this.storage.remove(REFRESH_TOKEN_KEY);
   }
 }
-
-export default new Token(Cookie);
+const token = new Token(Cookie);
+export default token;

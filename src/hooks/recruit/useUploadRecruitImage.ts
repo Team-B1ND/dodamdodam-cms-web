@@ -54,7 +54,7 @@ const useUploadRecruitImage = () => {
         );
       }
     },
-    [postUploadMutation, setRecruitPdfData, setModifyRecruitData]
+    [postUploadMutation, id, setRecruitPdfData, setModifyRecruitData, setImgUrl]
   );
 
   const UploadThumbnail = useCallback(
@@ -86,7 +86,7 @@ const useUploadRecruitImage = () => {
         }
       );
     },
-    [postUploadMutation, setImgUrl]
+    [postUploadMutation, setModifyRecruitData, id, setImgUrl]
   );
 
   const handleDeletePdf = (id: number) => {

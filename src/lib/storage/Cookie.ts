@@ -12,5 +12,5 @@ class Cookie implements Storage {
     cookie.remove(key);
   }
 }
-
-export default new Cookie();
+const cookies = new Cookie();
+export default cookies;
